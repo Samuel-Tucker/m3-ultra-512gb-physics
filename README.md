@@ -65,6 +65,34 @@ Tested on real `Qwen3-8B-Base` BF16 (`39.94 tok/s` stock) and matched-precision 
 ### 4. Custom Fused Metal RMSNorm+Gate+Up+SiLU Megakernel (`benchmarks/exp12_t0_dispatch_floor_and_megakernel.py`)
 - Collapsing 5 separate MLX ops into 1 Metal kernel sped up `Qwen3-0.6B` FFN by **`1.18×`** (`379 → 448 GB/s`) where dispatch overhead dominates, while matching MLX (`0.99×`) on DRAM-bound 4B/8B shapes.
 
+### 5. `Ornith-1.5-35B-A3B-6bit` + 6-Layer Parallel `DFlash` & Exact 40-Layer MoE Expert-Union Physics (`benchmarks/exp9_ornith_dflash_and_union.py`)
+Deep 28-layer serial drafters stalled on matched-precision targets due to $K \times 28$ `t0` dispatches. Switching to a **6-layer parallel block-diffusion drafter (`DFlash Q4`, ~220 MB, 1 single forward pass for all $K$ draft tokens: `2.51 ms` @ `K=4`, `3.35 ms` @ `K=8`, `4.62 ms` @ `K=16`)** with exact GatedDeltaNet state rollback (`results/exp9_ornith_dflash.json`):
+- **Python (`K=8`, `DFlash Q4`):** `88.0 →` **`177.96 tok/s` (`2.02×`)**, **`100.00%` SHA-256 bit-exact** vs serial target!
+- **Math (`K=8`, `DFlash Q4`):** `87.2 →` **`127.92 tok/s` (`1.47×`)**, **`100.00%` SHA-256 bit-exact** (`K=4`: `137.27 tok/s`, `1.57×`).
+- **Forced GatedDeltaNet Rollback Proof:** `6/6` forced rejections (`K=4,8,16`) produced **`100.0%` exact SHA-256 continuation matches** against clean prefix runs.
+- **Exact 40-Layer MoE Expert-Union Table (`E=256, k=8`, real contiguous vs position-shuffled vs uniform random):**
+
+| Verify Width `K` | Real Contiguous `U_K` | Position-Shuffled Control | Uniform Random Bound | Temporal Locality Savings vs Uniform |
+| ---: | ---: | ---: | ---: | ---: |
+| `1` | `8.00` (`1.00×`) | `8.00` (`1.00×`) | `8.00` (`1.00×`) | — |
+| `2` | `13.26` (`1.66×`) | `14.75` (`1.84×`) | `15.75` (`1.97×`) | `-15.8%` |
+| `4` | `21.50` (`2.69×`) | `25.87` (`3.23×`) | `30.53` (`3.82×`) | `-29.6%` |
+| **`8`** | **`34.38` (`4.30×`)** | `42.70` (`5.34×`) | `57.42` (`7.18×`) | **`-40.1%`** *(optimal `K*=8`)* |
+| `16` | `53.57` (`6.70×`) | `65.59` (`8.20×`) | `101.96` (`12.75×`) | `-47.5%` *(slower than `K=8`)* |
+| `32` | `76.12` (`9.51×`) | `92.92` (`11.61×`) | `163.31` (`20.41×`) | `-53.4%` |
+
+- **Takeaway:** Real adjacent tokens cut unique MoE experts by **40–47% vs uniform** (and 19.5% vs shuffled!), yet the `6.70×` union at `K=16` still makes `K=8` strictly faster than `K=16` — directly confirming the council's lift-cost optimum.
+- **Seesaw-MoE Quality Verified (`0.0057 nats` KL, `99.22%` top-1 on Python):** Routing tail/singleton experts to a 2-bit shadow preserves >99.2% top-1 accuracy, confirming the math — though dual MLX dispatch still loses speed to `t0` without a single fused mixed-precision Metal MoE kernel.
+
+### 6. Zero-`t0` CPU Suffix-Automaton Speculative Oracle (`benchmarks/exp14_zero_t0_suffix_tree_spec.py`)
+Running an O(1) rolling n-gram suffix matcher on M3 Ultra's idle CPU cores (`~1.2 ms` total across 160 tokens, zero GPU `t0`, zero extra RAM) on matched-precision **`Qwen3-8B-Q4`** (`results/exp14_suffix_qwen8b_q4.json`):
+- `rag_extract` (`K=4`): `100.68 →` **`130.70 tok/s` (`1.30×`)** · `code_refactor` (`K=4`): `102.81 →` **`124.44 tok/s` (`1.21×`)** · `math_proof` (`K=4`): `105.23 →` **`110.94 tok/s` (`1.05×`, `100%` exact)** · `fresh_prose`: `1.03×` (**zero slowdown on novel text**).
+
+---
+
+## 10-Model Frontier Council
+Full synthesis and empirical grading of all 10 independent max-thinking council seats (`Gemini 4 Neon XHigh`, `Carbon High`, `Argon High`, `GPT-6.2 Astra Max`, `GPT-6.2 Sol Max`, `Kimi K3.1 Pro Max`, `Claude Opus 5.5 Max`, `Claude Fable 5.2 Max`, `Tencent Hy4 XHigh`, `Z.ai GLM-5.3 XHigh`) is in [`council/synthesis.md`](council/synthesis.md).
+
 ---
 
 ## Fast Kills (Honest Negative Results Backed by Hardware Data)

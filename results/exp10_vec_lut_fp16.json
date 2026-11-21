@@ -10248,7 +10248,7 @@
     "differential_failures": []
   },
   "quality_audit": {
-    "snapshot": "/Users/samuel/.cache/huggingface/hub/models--Qwen--Qwen3-8B-Base/snapshots/49e3418fbbbca6ecbdf9608b4d22e5a407081db4",
+    "snapshot": "~/.cache/huggingface/hub/models--Qwen--Qwen3-8B-Base/snapshots/49e3418fbbbca6ecbdf9608b4d22e5a407081db4",
     "checkpoint_shard": "model-00003-of-00005.safetensors",
     "weight_key": "model.layers.18.mlp.up_proj.weight",
     "weight_dtype": "mlx.core.bfloat16",

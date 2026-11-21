@@ -1,5 +1,5 @@
 {
-  "model": "/Users/samuel/.cache/huggingface/hub/models--ornith-ai--Ornith-1.5-35B-A3B-MLX-6bit/snapshots/585b7867b0517980293ece857b26d64e84491352",
+  "model": "~/.cache/huggingface/hub/models--ornith-ai--Ornith-1.5-35B-A3B-MLX-6bit/snapshots/585b7867b0517980293ece857b26d64e84491352",
   "stock_median_tok_s": 78.27,
   "shadow_2bit_gb": 10.07,
   "router_weight_profile": [
