@@ -118,6 +118,30 @@ Audited across **43 real `Qwen3-8B-Base` BF16 tensors (`1.78 billion weights`, `
 
 - **Two Wins + One Honest Limit:** (1) At `B=1`, `split_4bit` delivers **`1.224×` faster decode (`651.4 GB/s` effective BF16 BW!) AND `24.2%` less RAM with literally zero bits lost** (`1.193×` over our own matched-order BF16 kernel). (2) At `B=4..8`, custom Metal 4 GEMV also exposes a **`1.34×–1.37×`** stock MLX BF16 verification inefficiency! (3) `split_3bit` saves only `0.19 bpw` more (2.55% escape rate) while unaligned 3-bit bit-unpacking drops speed to `0.47×` — cleanly killed in favour of `split_4bit`.
 
+### 9. 36-Layer QERA Shared-Input Bessel Error Protection (`benchmarks/exp11_qera_bessel_and_cosh_kv.py`)
+Proposed by **GPT-6.2 Astra MAX** (2B: protecting quantization residuals along the principal covariance directions of activations using one shared input projection per `q/k/v` and `gate/up` group, inspired by the Alpöge path-quadric / Bessel decomposition). Fitted across **all 36 layers of `Qwen3-8B-Base`** and scored with exact FP64 KL divergence on **200 sealed tokens** (`results/exp11_qera_cosh_kv.json`):
+
+| 36-Layer `Qwen3-8B-Base` Quantisation | Mean Sealed KL (nats) | Median KL | p95 Tail KL | Mean KL Reduction |
+| :--- | ---: | ---: | ---: | ---: |
+| Stock `Q2-g64` (unprotected) | `1.4849` | `1.0277` | `4.1609` | `1.00×` |
+| **`Q2-g64 + Shared Bessel Rank-32`** | **`0.2658`** | `0.2049` | `0.6930` | **`5.59×`** *(beats unprotected Q4 mean!)* |
+| **`Q2-g64 + Shared Bessel Rank-64`** | **`0.2591`** | `0.1903` | `0.6685` | **`5.73×`** |
+| Stock `Q3-g64` (unprotected) | `0.2884` | `0.1102` | `0.4435` | `1.00×` |
+| **`Q3-g64 + Shared Bessel Rank-32`** | **`0.0789`** | `0.0518` | `0.2414` | **`3.65×`** |
+| **`Q3-g64 + Shared Bessel Rank-64`** | **`0.0764`** | `0.0491` | `0.2359` | **`3.77×`** |
+| Stock `Q4-g64` (unprotected) | `0.3034` *(outlier tail)* | `0.0249` | `0.1976` | `1.00×` |
+| **`Q4-g64 + Shared Bessel Rank-32`** | **`0.0229`** | `0.0129` | `0.0661` | **`13.24×`** |
+| **`Q4-g64 + Shared Bessel Rank-64 + Tiles`** | **`0.0223`** | `0.0127` | `0.0619` | **`13.62×`** |
+
+- **Honest Speed Reality Check (`pair_benchmark`):** Using stock MLX `Q2` + separate rank-64 matmul clocked `0.400–0.427 ms` (`1.27×–1.44×` faster than BF16, but **`0.79×–0.85×` slower than stock MLX `Q4`** `0.333–0.347 ms` because MLX's stock `Q2` kernel + extra dispatch lags `Q4`). That directly motivates Wave 5 (`exp20`): pairing QERA Rank-32 with our **`2.16×`-faster-than-Q4 custom Metal 4 Zero-FMA 2.0-bit TG-SRAM LUT** (`exp10`)!
+
+### 10. `Ornith-1.5-35B-A3B-6bit` 4-Workload Stacked Speculative Matrix & 9/9 Exact GatedDeltaNet Rollback (`benchmarks/exp16_stacked_ornith_dflash_suffix.py`)
+Extending `exp9` with proper **GatedDeltaNet recurrent + conv state rollback** across all 4 workloads (`160` tokens each, `results/exp16_stacked_ornith.json`):
+- **Forced GatedDeltaNet Rollback (`K = 8, 9, 17`):** **`9 / 9`** forced rejections matched clean-prefix follow-up continuations with **`100.0%` exact SHA-256** (`gated_delta_conv_bits_match = true`, `gated_delta_masked_recurrent_bits_match = true`).
+- **`rag_extract`:** Stock serial `86.89 tok/s` → **Zero-`t0` CPU Suffix-only (0 extra RAM!) `144.66 tok/s` (`1.66×`, `100.0%` SHA-256 exact)** → **`DFlash-Q4` `212.77 tok/s` (`2.45×`, `100.0%` SHA-256 exact!)** (over 212 tok/s on a 35B MoE!).
+- **`code_refactor`:** Stock serial `86.60 tok/s` → **`DFlash-Q4` `170.55 tok/s` (`1.97×`, `100.0%` SHA-256 exact)**.
+- **Honest Hybrid Takeaway:** On a model that *already* has a 6-layer parallel `DFlash` drafter (`3.35 ms`), pure `DFlash-Q4` (`144.9 tok/s` mean) beats suffix-first stacking (`136.2 tok/s`) because short suffix hits (`K=2..4`) preempt full `K=8` DFlash sweeps; standalone Zero-`t0` CPU Suffix (`1.66×` on RAG at 0 RAM!) shines on models *without* a DFlash drafter (`Qwen3-8B-Q4`, `GLM-5.3`). On `fresh_prose` (tok 103) and `math_proof` (tok 15), all 4 batched arms agree with each other on the exact same batch-vs-serial GatedDeltaNet BF16 tie-break.
+
 ---
 
 ## 10-Model Frontier Council
@@ -133,12 +157,12 @@ Full synthesis and empirical grading of all 10 independent max-thinking council 
 4. **Exact Chronological Box+Sphere KV Certificates (`benchmarks/exp5_exact_cert_kv_32k.py`, `results/exp5_exact_cert_kv.json`):** **KILLED.** RoPE rotation spreads chronological 64-token key pages across $\mathbb{R}^{128}$ so exact worst-case `min/max` + sphere envelopes skip **`0.0%`** of pages at `eps=1e-3` across all layers (contrast with `exp13`'s `18.8×–22.7×` KV cut via 1-bit `popcount` screening + exact FP16 scoring!).
 5. **200 GB Spherical-Cone Contiguous FFN Capsule Atlas + SLC Rank-64 Compensator (`benchmarks/exp6_cone_atlas_and_slc_comp.py`, `results/exp6_cone_atlas.json`):** **KILLED.** On real `Qwen3-8B` middle layers (`L10/L18/L26`), 32 spherical cones barely beat static pruning (`rel_L2 = 0.692` vs `0.701` static vs `0.278` oracle at `keep=25%`), and extra compensator dispatches left `keep=25%` at `1.04×` vs full BF16 (`0.481` vs `0.502 ms`). *(First/last layers `L2/L34` were low-rank: `L2` `keep=50%` hit `0.008` beating oracle `0.019`.)*
 6. **240 GB "Multiplying Matrices Without Multiplying" Input-PQ 24 KB Slab-Sum Atlas (`benchmarks/exp7_maddness_ram_atlas.py`, `results/exp7_maddness_atlas.json`):** **KILLED ON BOTH SPEED AND ACCURACY** *(independently proposed by 3 frontier council models: Neon, Sol, Astra — and killed cleanly against their pre-declared gates!)*. On real M3 Ultra silicon, summing `G=512` random 24 KB contiguous slabs out of a `1.61 GB` FP16 atlas achieved only **`97.4 GB/s`** useful DRAM bandwidth (`0.1291 ms`, **2× slower than MLX Q4 `0.064 ms`!**; `g=16` hit `85.8 GB/s`) with `sealed_rel_L2 = 0.4762` (`cos = 0.878`). Even a 451 GB PCA-top256 + 2-stage RVQ hybrid had `sealed_rel_L2 = 0.2248`. Random 24 KB slab jumps across multi-GB RAM suffer a `~6×` TLB/bank penalty vs dense streaming.
+7. **Deterministic Exact `cosh`-Moment & Bit-Exact BF16-Rounding KV Certificates — Even With Lloyd K-Means Clustered & RHT Pages (`benchmarks/exp11_qera_bessel_and_cosh_kv.py`, `results/exp11_qera_cosh_kv.json`):** **KILLED (`100.0%` PAGES REOPENED).** Tested on `8,192`-token real `Qwen3-4B` KV across `5` layers (`160` query heads), `3` page sizes (`64, 128, 256`), and `3` layouts (`chronological`, Lloyd `clustered`, `clustered_rht`), with `0` certificate violations. Even though k-means clustering cut median page $L_2$ radius nearly `3×` (`67.33 → 23.46`), worst-case $\cosh(R_p\|q\|/\sqrt{128}) - 1$ still explodes so **`100.0%`** of pages reopen (`99.98%` for box-sphere at `tol=0.01`). This closes deterministic worst-case KV page skipping in $d=128$ RoPE attention and confirms why **1-bit `Masullo-Shell Sign-KV` (`exp13`, `22.7×` KV cut!)** is the winning design.
 
 ---
 
-## Running Now (Wave 4 Double-Down)
-- `exp16` (running now on `ultra`): **Stacked Zero-`t0` CPU Suffix + 6-Layer Parallel `DFlash-Q4` + Exact `GatedDeltaRollback`** on `Ornith-1.5-35B-A3B-6bit`.
-- `exp11` (running now on `ultra`): **Astra 2B QERA Shared-Input Bessel Error Protection** across all 36 `Qwen3-8B` layers + **Astra 2C `cosh` Moment KV Certificate** + **Sol 2C Bit-Exact BF16 Rounding** + **K-means Clustered KV Pages**.
-- `exp17` (building): **363 GiB 78-Layer Frontier `GLM-5.3-4bit-MLX`** full-400GB-RAM physics, MoE expert-union law, and Zero-`t0` speculative decoding.
-- `exp18` (building): **YaRN-Scaled 128K & 256K Live Verbatim NIAH** (`38.6 GB` KV!) with fused `Masullo-Shell Sign-KV v2`.
-- `exp19` (next): **Full 36-Layer End-to-End 100.000% Bit-Exact Lossless BF16 Stack** (`split_4bit` 12.135b Metal 4 + `Qwen3-1.7B-Q4` speculative + Zero-`t0` CPU Suffix).
+## Running Now (Wave 4B & Wave 5 Double-Down)
+- `exp17` (running now on `ultra`): **389.6 GiB 78-Layer Frontier `GLM-5.3-4bit-MLX`** full-400GB-RAM physics, MoE expert-union law, Zero-`t0` suffix oracle, and `B=1..8` multi-stream batching!
+- `exp18` (building on Codex Astra): **YaRN-Scaled 128K & 256K Live Verbatim NIAH** (`38.6 GB` KV!) with fused `Masullo-Shell Sign-KV v2`.
+- `exp19` (building on Gemini Carbon): **Full 36-Layer End-to-End 100.000% Bit-Exact Lossless BF16 Stack** (`split_4bit` 12.135b Metal 4 + `Qwen3-1.7B-Q4` speculative + Zero-`t0` CPU Suffix — targeting lossless BF16 faster than stock Q4!).
+- `exp20` (building on Kimi K3.1 Pro): **Parseval-RHT 2.0-Bit Zero-FMA Metal 4 TG-SRAM LUT + Shared QERA Bessel Rank-32** end-to-end (testing Q4-grade quality at ~2× Q4 speed!).
