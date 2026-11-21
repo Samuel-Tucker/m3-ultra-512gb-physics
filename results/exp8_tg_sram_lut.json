@@ -1,0 +1,28 @@
+{
+  "shape": [
+    12288,
+    4096
+  ],
+  "diff_check": {
+    "lut1_max_err": 0.25,
+    "lut2_max_err": 0.25
+  },
+  "fp16_ms": 0.1791,
+  "fp16_gbs": 561.9,
+  "mlx_q4_ms": 0.0641,
+  "mlx_q4_gbs": 441.7,
+  "mlx_q4_mb": 28.31,
+  "mlx_q2_ms": 0.038,
+  "mlx_q2_gbs": 414.0,
+  "mlx_q2_mb": 15.73,
+  "lut1_ms": 0.019,
+  "lut1_gbs": 332.7,
+  "lut1_mb": 6.32,
+  "lut1_vs_q4": 3.38,
+  "lut1_vs_fp16": 9.43,
+  "lut2_ms": 0.0354,
+  "lut2_gbs": 356.5,
+  "lut2_mb": 12.61,
+  "lut2_vs_q4": 1.81,
+  "lut2_vs_fp16": 5.06
+}
