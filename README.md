@@ -8,9 +8,9 @@ Sibling repo to [`rtx3070-8gb-physics`](https://github.com/Samuel-Tucker/rtx3070
 
 ---
 
-## Live Status (21 Nov 2026 — Active 4-Hour Hardware Session)
+## Final Session Results (21 Nov 2026 — 4-Hour Exclusive M3 Ultra 512 GiB Booking Complete)
 
-Results are pushed live as each wave completes and passes exact verification gates.
+All **25 hardware benchmark receipts** (`probe_physics` + `exp1`–`exp20` + `exp17b–17e`) were measured sequentially on an exclusive Apple M3 Ultra (`applegpu_g15d`, 512 GiB unified RAM, MLX 0.32.2–0.32.4) with raw JSON receipts archived in [`results/`](results/).
 
 ### Hardware Physics Ground Truth (Apple M3 Ultra, 512 GiB, 80-Core Metal 4, MLX 0.32.4)
 
@@ -190,6 +190,27 @@ Combining our two quantized breakthroughs across **all 252 linear layers of `Qwe
   2. **Block Speed (Pure LUT2):** On full 6-copy SLC-flushed `gate+up+SiLU+down` FFN blocks, zero-FMA `lut2_rht` beats stock MLX `Q4-g64` at **`K=1` (`1.29×`)**, **`K=4` (`1.07×`, beating `Q2` too)**, and **`K=8` (`1.10×`, beating `Q2` too)**.
   3. **Honest Unfused E2E Limit (`t0` Law Confirmed Again!):** Running `RHT` (Python butterfly) + 2-pass `LUT` + reducer + separate `x@A` / `B@u` ops unfused exploded per-layer `t0` dispatches, dropping live 36L decode to **`34.46 tok/s`** (`0.33×` of Q4). Moral: QERA+RHT+LUT2 MUST be compiled into a **single fused Metal kernel per projection** to translate its `2.16×` single-GEMV advantage into end-to-end tok/s!
 
+### 14. Frontier Quarter-Terabyte Physics (`169.4 GiB` & `238.3 GiB` 288-Expert `GLM-5.3-Flash`) — `42×–60×` `mx.set_wired_limit` Cliff, 42-Layer `E=288` Expert-Union Law & `B=8` Multi-Stream Scaling (`benchmarks/exp17b_frontier_169gb_glm53_flash.py`)
+Scaling beyond 8B–35B to two quarter-terabyte frontier MoE checkpoints (`45` layers, `288` routed experts `top-8`, `34` GatedDeltaNet linear-attn + `11` DeepSeek Sparse Attention layers) — plus a `389.59 GiB` 78-layer `GLM-5.3-4bit` probe (`results/exp17b_glm53_flash_169gb.json`, `results/exp17c_glm53_flash_238gb.json`, `results/exp17d_glm53_flash_169gb_wired.json`, `results/exp17e_glm53_flash_238gb_wired.json`):
+
+- **Massive Discovery #1 — The `42×–60×` Default MLX Unwired-Buffer Cliff:**
+  - Without calling `mx.set_wired_limit(...)`, default MLX unwired/re-wired the entire `169.4–238.3 GiB` checkpoint at `~105 GiB/s` on every token step (**`0.63 tok/s`** on 169 GiB and **`0.43 tok/s`** on 238 GiB, despite `208 GiB` free RAM and zero swap!).
+  - Adding **one single line (`mx.set_wired_limit(390 * 2**30)`)** instantly jumped decode **`41.9×` on 169.4 GiB (`0.63 → 26.41 tok/s`)** and **`59.8×` on 238.3 GiB (`0.43 → 25.70 tok/s`)**!
+  - Crossing macOS's default `iogpu.wired_limit_mb=0` (`~384 GiB` = 75% of 512 GiB) by just `5.6 GiB` (`389.59 GiB` `glm53-4bit-mlx`) triggered per-layer VM paging (`0.19 tok/s`), proving the exact `384 GiB` OS ceiling without `sudo sysctl iogpu.wired_limit_mb`.
+- **Massive Discovery #2 — `6-bit` (`238.3 GiB`) Costs `< 3%` More Latency Than `4/8-bit` (`169.4 GiB`) at `B=1`:** Because `t0` + active linear-attn + router dominate single-stream decode on a 288-expert sparse MoE, stepping up to a **quarter-terabyte 6-bit checkpoint** runs at **`25.70–25.88 tok/s`** vs **`26.11–26.41 tok/s`** (`97.3%` as fast!).
+
+| Frontier Checkpoint (45L, `E=288, top-8`) | Wired? | `B=1` Serial | `K=8` Verify (`5/5` exact) | `K=16` Verify (`5/5` exact) | `B=2` Agg | `B=4` Agg | **`B=8` Agg (`per stream`)** |
+| :--- | :---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `GLM-5.3-Flash-mixed-4_8bit` (`169.4 GiB`) | No *(default)* | `0.63 tok/s` (`1591 ms`) | `1500 ms` (`0.99×`) | `1509 ms` (`0.99×`) | `1.26` | `2.44` | `5.09 tok/s` (`8.10×`) |
+| **`GLM-5.3-Flash-mixed-4_8bit` (`169.4 GiB`)** | **Yes (`390 GiB`)** | **`26.41 tok/s`** (**`41.9×`**) | **`82.9 ms`** (`10.4 ms/tok`) | **`121.3 ms`** (**`7.58 ms/tok`**, `5.0×` amort.) | **`40.20`** | **`61.28`** | **`83.17 tok/s`** (`10.40/s`, **`3.15×`**) |
+| `GLM-5.3-Flash-6bit` (`238.3 GiB`) | No *(default)* | `0.43 tok/s` (`2305 ms`) | `2315 ms` (`1.02×`) | `2298 ms` (`1.01×`) | `0.87` | `1.73` | `3.44 tok/s` (`7.93×`) |
+| **`GLM-5.3-Flash-6bit` (`238.3 GiB`)** | **Yes (`390 GiB`)** | **`25.70 tok/s`** (**`59.8×`**) | **`97.6 ms`** (`12.2 ms/tok`) | **`157.8 ms`** (**`9.86 ms/tok`**, `4.0×` amort.) | **`37.16`** | **`53.57`** | **`69.17 tok/s`** (`8.65/s`, **`2.69×`**) |
+
+- **Exact 42-Layer `E=288, k=8` Frontier MoE Expert-Union Law (`code_refactor` / `fresh_prose`):**
+  - `K=2`: `13.66–14.57` vs `15.78` uniform (`-7.7%` to `-13.4%`) · `K=4`: `23.51–26.06` vs `30.69` (`-15.1%` to `-23.4%`)
+  - **`K=8`**: `39.90–45.23` vs `58.11` uniform (**`-22.2%` to `-31.3%`**, up to `-15.4%` pure temporal locality vs position-shuffled!)
+  - **`K=16`**: `64.62–74.95` vs `104.50` uniform (**`-28.3%` to `-38.2%`**) · **`K=32`**: `98.78–116.28` vs `171.08` (**`-32.0%` to `-42.3%`**).
+
 ---
 
 ## 10-Model Frontier Council
@@ -209,5 +230,29 @@ Full synthesis and empirical grading of all 10 independent max-thinking council 
 
 ---
 
-## Running Now (Final Wave 5 Frontier Benchmark)
-- `exp17b` (running now on `ultra`): **`169 GB` 45-Layer 288-Expert Frontier `GLM-5.3-Flash-MLX-4bit-MTP`** (`215 GiB` under macOS's `384 GiB` default `iogpu.wired_limit_mb=0` cap — after catching `389.59 GiB` `GLM-5.3-4bit` paging at `0.19 tok/s` when `5.6 GiB` over the default wired limit!). Measuring serial decode, exact `K=1..16` verify knee, 42-layer `E=288, k=8` frontier MoE expert-union law, and `B=1..8` multi-stream aggregate throughput!
+## Reproducing Every Benchmark on an Apple M3 Ultra
+
+```bash
+# 1. Hardware physics ground truth (DRAM, SLC cliff, gather vs streaming, CPU-AMX concurrency)
+python3 benchmarks/probe_m3_ultra_physics.py --out results/probe_physics.json
+
+# 2. 68-variant Metal 4 32 KB TG-SRAM Zero-FMA LUT + FP16=BF16 roofline
+python3 benchmarks/exp10_metal4_vec_lut_and_fp16_knee.py --out results/exp10_vec_lut_fp16.json
+
+# 3. 100.000% Bit-Exact Lossless 12.135-bit BF16 36-Layer Qwen3-8B Stack (beats Q4 on RAG!)
+python3 benchmarks/exp19_e2e_bitexact_bf16_stack.py --out results/exp19_bitexact_bf16_stack.json
+
+# 4. 72-dispatch Metal 4 Masullo-Shell Sign-KV v2 (Live YaRN 32K/64K/128K/256K NIAH)
+python3 benchmarks/exp18_masullo_signkv_v2_256k.py --max-ctx 262144 --out results/exp18_masullo_signkv_v2_256k.json
+
+# 5. Ornith-35B-A3B-6bit + 6-Layer Parallel DFlash-Q4 (212.8 tok/s bit-exact) + 40L Expert-Union
+python3 benchmarks/exp9_ornith_dflash_and_union.py --out results/exp9_ornith_dflash.json
+python3 benchmarks/exp16_stacked_ornith_dflash_suffix.py --out results/exp16_stacked_ornith.json
+
+# 6. 36-Layer QERA Bessel (5.7x-13.6x KL cut) + Parseval-RHT LUT2 + Exact cosh/clustered KV kill
+python3 benchmarks/exp11_qera_bessel_and_cosh_kv.py --out results/exp11_qera_cosh_kv.json
+python3 benchmarks/exp20_qera_lut2_metal4_e2e.py --out results/exp20_qera_lut2_e2e.json
+
+# 7. Quarter-Terabyte 288-Expert GLM-5.3-Flash (42x-60x mx.set_wired_limit proof + B=1..8 scaling)
+python3 benchmarks/exp17b_frontier_169gb_glm53_flash.py --wired-limit-gib 390 --out results/exp17d_glm53_flash_169gb_wired.json
+```
