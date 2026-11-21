@@ -102,6 +102,22 @@ Wired live into **all 36 real layers of frozen `Qwen3-4B-Base` (Q4 weights)** wi
 
 *(At 32K and 64K, Sign-KV generated the exact same verbatim passcode sentence char-for-char as Dense FP16 SDPA! At 128K, unscaled `Qwen3-4B-Base` exceeds its native 40K RoPE window even in exact Dense FP16 — Wave 4 tests YaRN-scaled 128K & 256K verbatim NIAH + fused screening passes!)*
 
+### 8. 100.000% Bit-Exact Lossless 12.135-Bit BF16 Split-Stream Metal 4 Codec (`benchmarks/exp15_opus_bitexact_bf16_codec.py`)
+Proposed blind by **Claude Opus 5.5 MAX** (who predicted BF16 exponent entropy `2.6 ± 0.3 bits` before seeing a byte of weights) from the Alpöge "gcd gluing / lossless factorization" angle: BF16 wastes 8 full bits on an exponent whose real distribution is tightly concentrated around each 128-weight block's max exponent. Split every BF16 weight into an exact `8-bit sign+mantissa` stream + a `4-bit` relative exponent offset (with a rare sparse escape table for weights >14 binades below block max), then reconstruct exact `bfloat16` bits on-the-fly in Metal 4 registers.
+
+Audited across **43 real `Qwen3-8B-Base` BF16 tensors (`1.78 billion weights`, `3.56 GB`)** and benchmarked on SLC-flushed `12288×4096` (`6` copies, `604 MB` vs `458 MB`, `256 MiB` GPU eviction sweep) in [`results/exp15_opus_bf16_codec.json`](results/exp15_opus_bf16_codec.json):
+- **Weight Entropy Audit:** Pooled exponent entropy = **`2.593 bits`** (dead-centre inside Opus's `2.3–2.9` prediction!); **`99.9902%`** of all `1.78B` weights fit within 15 binades (`0.0097%` escape rate) → **`12.135 bits/weight` (`1.318×` lossless compression, `24.16%` RAM saved!)**.
+- **100.000% Bit-Exact Proof:** **`0` uint16 mismatches** out of **`50,331,648`** real `L18.mlp.up_proj` weights (plus `0` mismatches on exhaustive signed-zero / subnormal / power-of-two edge fixtures) AND **`0` float32 bit mismatches (`max_abs_diff = 0.000000`)** across Batch `1`, `4`, and `8` Metal 4 GEMVs!
+
+| Method (`12288×4096`, 6× SLC-Flushed) | Batch `B=1` (Eff. BF16 BW) | Batch `B=4` (Eff. BF16 BW) | Batch `B=8` (Eff. BF16 BW) | Payload / Matrix | Bit-Exact? |
+| :--- | ---: | ---: | ---: | ---: | :---: |
+| Stock MLX BF16 (`@`) | `0.1891 ms` (`532.4 GB/s`) | `0.2542 ms` (`396.0 GB/s`) | `0.3467 ms` (`290.4 GB/s`) | `100.66 MB` (`16.00b`) | Baseline |
+| Custom Metal 4 `same_order_bf16` | `0.1844 ms` (`546.0 GB/s`, `1.03×`) | **`0.1895 ms`** (`531.3 GB/s`, **`1.34×`**) | **`0.2527 ms`** (`398.4 GB/s`, **`1.37×`**) | `100.66 MB` (`16.00b`) | **0 bit diffs** |
+| **Metal 4 `split_4bit` (12.135b LOSSLESS)** | **`0.1545 ms`** (**`651.4 GB/s`**, **`1.224×`**) | **`0.1920 ms`** (`524.4 GB/s`, **`1.324×`**) | `0.3494 ms` (`288.1 GB/s`, `0.99×`) | **`76.35 MB` (`12.135b`)** | **0 bit diffs** |
+| Metal 4 `split_3bit` (11.948b LOSSLESS) | `0.4057 ms` (`248.1 GB/s`, `0.47×` — *killed*) | `0.4324 ms` (`232.8 GB/s`, `0.59×`) | `0.4976 ms` (`202.3 GB/s`, `0.70×`) | `75.43 MB` (`11.948b`) | **0 bit diffs** |
+
+- **Two Wins + One Honest Limit:** (1) At `B=1`, `split_4bit` delivers **`1.224×` faster decode (`651.4 GB/s` effective BF16 BW!) AND `24.2%` less RAM with literally zero bits lost** (`1.193×` over our own matched-order BF16 kernel). (2) At `B=4..8`, custom Metal 4 GEMV also exposes a **`1.34×–1.37×`** stock MLX BF16 verification inefficiency! (3) `split_3bit` saves only `0.19 bpw` more (2.55% escape rate) while unaligned 3-bit bit-unpacking drops speed to `0.47×` — cleanly killed in favour of `split_4bit`.
+
 ---
 
 ## 10-Model Frontier Council
@@ -120,9 +136,9 @@ Full synthesis and empirical grading of all 10 independent max-thinking council 
 
 ---
 
-## Running Now (Wave 3C & Wave 4 Double-Down)
-- `exp15` (running now): **Opus 5.5 MAX's 12.125-bit & 11.125-bit 100.000% Bit-Exact Lossless BF16 Metal 4 Codec** (`23` compiled variants, zero bits lost!).
-- `exp11` (running now): **Astra 2B QERA Shared-Input Bessel Error Protection** across all 36 `Qwen3-8B` layers + **Astra 2C `cosh` Moment KV Certificate** + **Sol 2C Bit-Exact BF16 Rounding** + **K-means Clustered KV Pages**.
-- `exp16` (ready): **Stacked Zero-`t0` CPU Suffix + 6-Layer Parallel `DFlash-Q4` + Exact `GatedDeltaRollback`** on `Ornith-1.5-35B-A3B-6bit`.
+## Running Now (Wave 4 Double-Down)
+- `exp16` (running now on `ultra`): **Stacked Zero-`t0` CPU Suffix + 6-Layer Parallel `DFlash-Q4` + Exact `GatedDeltaRollback`** on `Ornith-1.5-35B-A3B-6bit`.
+- `exp11` (running now on `ultra`): **Astra 2B QERA Shared-Input Bessel Error Protection** across all 36 `Qwen3-8B` layers + **Astra 2C `cosh` Moment KV Certificate** + **Sol 2C Bit-Exact BF16 Rounding** + **K-means Clustered KV Pages**.
 - `exp17` (building): **363 GiB 78-Layer Frontier `GLM-5.3-4bit-MLX`** full-400GB-RAM physics, MoE expert-union law, and Zero-`t0` speculative decoding.
 - `exp18` (building): **YaRN-Scaled 128K & 256K Live Verbatim NIAH** (`38.6 GB` KV!) with fused `Masullo-Shell Sign-KV v2`.
+- `exp19` (next): **Full 36-Layer End-to-End 100.000% Bit-Exact Lossless BF16 Stack** (`split_4bit` 12.135b Metal 4 + `Qwen3-1.7B-Q4` speculative + Zero-`t0` CPU Suffix).
