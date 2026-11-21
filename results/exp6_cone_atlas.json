@@ -1,0 +1,194 @@
+{
+  "n_cones": 32,
+  "layers": [
+    {
+      "layer": 2,
+      "keep_frac": 0.15,
+      "rel_l2_static": 0.4172,
+      "rel_l2_cone": 0.3549,
+      "rel_l2_cone_plus_slc64": 0.3399,
+      "rel_l2_oracle": 0.0814
+    },
+    {
+      "layer": 2,
+      "keep_frac": 0.25,
+      "rel_l2_static": 0.2287,
+      "rel_l2_cone": 0.1774,
+      "rel_l2_cone_plus_slc64": 0.1577,
+      "rel_l2_oracle": 0.0651
+    },
+    {
+      "layer": 2,
+      "keep_frac": 0.35,
+      "rel_l2_static": 0.0966,
+      "rel_l2_cone": 0.0929,
+      "rel_l2_cone_plus_slc64": 0.0643,
+      "rel_l2_oracle": 0.0595
+    },
+    {
+      "layer": 2,
+      "keep_frac": 0.5,
+      "rel_l2_static": 0.0214,
+      "rel_l2_cone": 0.0206,
+      "rel_l2_cone_plus_slc64": 0.008,
+      "rel_l2_oracle": 0.0189
+    },
+    {
+      "layer": 10,
+      "keep_frac": 0.15,
+      "rel_l2_static": 0.7748,
+      "rel_l2_cone": 0.7708,
+      "rel_l2_cone_plus_slc64": 0.7666,
+      "rel_l2_oracle": 0.4027
+    },
+    {
+      "layer": 10,
+      "keep_frac": 0.25,
+      "rel_l2_static": 0.7061,
+      "rel_l2_cone": 0.7065,
+      "rel_l2_cone_plus_slc64": 0.7062,
+      "rel_l2_oracle": 0.2916
+    },
+    {
+      "layer": 10,
+      "keep_frac": 0.35,
+      "rel_l2_static": 0.6414,
+      "rel_l2_cone": 0.6356,
+      "rel_l2_cone_plus_slc64": 0.6379,
+      "rel_l2_oracle": 0.211
+    },
+    {
+      "layer": 10,
+      "keep_frac": 0.5,
+      "rel_l2_static": 0.5389,
+      "rel_l2_cone": 0.5442,
+      "rel_l2_cone_plus_slc64": 0.5482,
+      "rel_l2_oracle": 0.1242
+    },
+    {
+      "layer": 18,
+      "keep_frac": 0.15,
+      "rel_l2_static": 0.7768,
+      "rel_l2_cone": 0.7661,
+      "rel_l2_cone_plus_slc64": 0.7729,
+      "rel_l2_oracle": 0.386
+    },
+    {
+      "layer": 18,
+      "keep_frac": 0.25,
+      "rel_l2_static": 0.7005,
+      "rel_l2_cone": 0.6922,
+      "rel_l2_cone_plus_slc64": 0.6999,
+      "rel_l2_oracle": 0.2775
+    },
+    {
+      "layer": 18,
+      "keep_frac": 0.35,
+      "rel_l2_static": 0.6363,
+      "rel_l2_cone": 0.6269,
+      "rel_l2_cone_plus_slc64": 0.6361,
+      "rel_l2_oracle": 0.1983
+    },
+    {
+      "layer": 18,
+      "keep_frac": 0.5,
+      "rel_l2_static": 0.5367,
+      "rel_l2_cone": 0.5282,
+      "rel_l2_cone_plus_slc64": 0.537,
+      "rel_l2_oracle": 0.1138
+    },
+    {
+      "layer": 26,
+      "keep_frac": 0.15,
+      "rel_l2_static": 0.7615,
+      "rel_l2_cone": 0.7198,
+      "rel_l2_cone_plus_slc64": 0.7169,
+      "rel_l2_oracle": 0.3171
+    },
+    {
+      "layer": 26,
+      "keep_frac": 0.25,
+      "rel_l2_static": 0.6703,
+      "rel_l2_cone": 0.6432,
+      "rel_l2_cone_plus_slc64": 0.6435,
+      "rel_l2_oracle": 0.231
+    },
+    {
+      "layer": 26,
+      "keep_frac": 0.35,
+      "rel_l2_static": 0.5988,
+      "rel_l2_cone": 0.5819,
+      "rel_l2_cone_plus_slc64": 0.5841,
+      "rel_l2_oracle": 0.1689
+    },
+    {
+      "layer": 26,
+      "keep_frac": 0.5,
+      "rel_l2_static": 0.4979,
+      "rel_l2_cone": 0.4946,
+      "rel_l2_cone_plus_slc64": 0.4978,
+      "rel_l2_oracle": 0.1009
+    },
+    {
+      "layer": 34,
+      "keep_frac": 0.15,
+      "rel_l2_static": 0.6133,
+      "rel_l2_cone": 0.5644,
+      "rel_l2_cone_plus_slc64": 0.3701,
+      "rel_l2_oracle": 0.3614
+    },
+    {
+      "layer": 34,
+      "keep_frac": 0.25,
+      "rel_l2_static": 0.5243,
+      "rel_l2_cone": 0.4329,
+      "rel_l2_cone_plus_slc64": 0.3143,
+      "rel_l2_oracle": 0.2095
+    },
+    {
+      "layer": 34,
+      "keep_frac": 0.35,
+      "rel_l2_static": 0.4285,
+      "rel_l2_cone": 0.339,
+      "rel_l2_cone_plus_slc64": 0.2731,
+      "rel_l2_oracle": 0.1254
+    },
+    {
+      "layer": 34,
+      "keep_frac": 0.5,
+      "rel_l2_static": 0.3002,
+      "rel_l2_cone": 0.2541,
+      "rel_l2_cone_plus_slc64": 0.224,
+      "rel_l2_oracle": 0.0564
+    }
+  ],
+  "bench": {
+    "full_bf16_ms": 0.502,
+    "cones": [
+      {
+        "keep_frac": 0.5,
+        "k_neurons": 6144,
+        "cone_ms": 0.831,
+        "speedup_vs_full": 0.6
+      },
+      {
+        "keep_frac": 0.35,
+        "k_neurons": 4301,
+        "cone_ms": 0.619,
+        "speedup_vs_full": 0.81
+      },
+      {
+        "keep_frac": 0.25,
+        "k_neurons": 3072,
+        "cone_ms": 0.481,
+        "speedup_vs_full": 1.04
+      },
+      {
+        "keep_frac": 0.15,
+        "k_neurons": 1843,
+        "cone_ms": 0.339,
+        "speedup_vs_full": 1.48
+      }
+    ]
+  }
+}

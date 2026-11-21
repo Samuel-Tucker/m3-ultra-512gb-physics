@@ -88,6 +88,20 @@ Deep 28-layer serial drafters stalled on matched-precision targets due to $K \ti
 Running an O(1) rolling n-gram suffix matcher on M3 Ultra's idle CPU cores (`~1.2 ms` total across 160 tokens, zero GPU `t0`, zero extra RAM) on matched-precision **`Qwen3-8B-Q4`** (`results/exp14_suffix_qwen8b_q4.json`):
 - `rag_extract` (`K=4`): `100.68 →` **`130.70 tok/s` (`1.30×`)** · `code_refactor` (`K=4`): `102.81 →` **`124.44 tok/s` (`1.21×`)** · `math_proof` (`K=4`): `105.23 →` **`110.94 tok/s` (`1.05×`, `100%` exact)** · `fresh_prose`: `1.03×` (**zero slowdown on novel text**).
 
+### 7. Live End-to-End 5-Kernel Metal 4 `Masullo-Shell Sign-KV` — 32K/64K/128K Context (`benchmarks/exp13_masullo_signkv_metal4.py`)
+Porting & supercharging the `rtx3070-8gb-physics` Sign-KV architecture onto Apple M3 Ultra: per-KV-head mean centring + in-register 128-point FWHT (`simd_shuffle_xor`) → 1-bit `uint4` Sign-Keys (`32×` smaller K; `8.39 MB/layer` at 64K fits inside the `64 MiB` SLC!) → 3-pass zero-sort 256-bin TG-SRAM `popcount` screening → **exact FP16 sparse-gather GQA attention** over `32 sink + 128 local + 256 screened = 416` exact tokens (never feeding low-bit scores into `exp()`!).
+
+Wired live into **all 36 real layers of frozen `Qwen3-4B-Base` (Q4 weights)** with unique 50%-depth secret passcode Needle-in-a-Haystack retrieval (`results/exp13_masullo_signkv.json`, differential self-test `0` bit mismatches, `0.00019` max diff vs FP32):
+
+| Context (`S`) | 36L Dense Attn | **36L Sign-KV Attn** | **Attn Speedup** | Dense E2E Decode | **Sign-KV E2E Decode** | **E2E Speedup** | **KV DRAM Cut** | Dense Recall | **Sign-KV Recall** |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | :---: |
+| **8,192 (8K)** | `2.16 ms` | **`1.63 ms`** | `1.32×` | `115.63 tok/s` | `91.19 tok/s` | `0.79×` *(4-pass `t0`)* | `5.6×` | YES | **YES (`FALCON-9472`)** |
+| **32,768 (32K)** | `7.20 ms` | **`2.98 ms`** | **`2.41×`** | `65.39 tok/s` | **`78.77 tok/s`** | **`1.20×`** | **`14.1×`** | YES | **YES (`ORCHID-3819`)** |
+| **65,536 (64K)** | `15.19 ms` | **`3.52 ms`** | **`4.31×`** | `43.11 tok/s` | **`69.31 tok/s`** | **`1.61×`** | **`18.8×`** (`0.63%` KV) | YES | **YES (`KESTREL-6140`)** |
+| **131,072 (128K)** | `33.31 ms` | **`4.25 ms`** | **`7.84×`** | `25.95 tok/s` | **`62.96 tok/s`** | **`2.43×`** | **`22.7×`** (`0.32%` KV) | NO *(RoPE limit)* | NO *(same RoPE limit)* |
+
+*(At 32K and 64K, Sign-KV generated the exact same verbatim passcode sentence char-for-char as Dense FP16 SDPA! At 128K, unscaled `Qwen3-4B-Base` exceeds its native 40K RoPE window even in exact Dense FP16 — Wave 4 tests YaRN-scaled 128K & 256K verbatim NIAH + fused screening passes!)*
+
 ---
 
 ## 10-Model Frontier Council
@@ -97,14 +111,18 @@ Full synthesis and empirical grading of all 10 independent max-thinking council 
 
 ## Fast Kills (Honest Negative Results Backed by Hardware Data)
 
-1. **Exact Cauchy–Schwarz LM-Head Pruning (`benchmarks/exp_stepanov_lmhead.py`, `results/exp1_stepanov_lmhead.json`):** **KILLED.** At $D = 4096$ ($\sqrt{D} = 64$), 4-bit residual norm bounds pruned only **`3.98%`** of vocabulary rows (`4.35%` with FWHT) — validating Fable 5.2's $\sqrt{d}$ concentration limit.
-2. **Dual-Dispatch `Seesaw-MoE` on 3B-Active MoE (`benchmarks/exp4_seesaw_moe_dualplane.py`, `results/exp4_seesaw_moe.json`):** **KILLED.** On `Ornith-1.5-35B-A3B-6bit` (`78.3 tok/s`), dropping all 8 routed experts 6-bit → 2-bit (3× fewer expert bytes!) only gained **`1.03×`** (`80.73 tok/s`), while splitting top-k into two `gather_qmm` dispatches slowed decode to **`0.86×`** (`67.42 tok/s`) — proving `t0` dispatch dominates 3B-active MoE decode on M3 Ultra.
+1. **Exact Cauchy–Schwarz LM-Head Pruning (`benchmarks/exp_stepanov_lmhead.py`, `results/exp1_stepanov_lmhead.json`):** **KILLED.** At $D = 4096$ ($\sqrt{D} = 64$), 4-bit residual norm bounds pruned only **`3.98%`** of vocabulary rows (`4.35%` with FWHT) — validating Fable 5.2's & Opus 5.5's $\sqrt{d}$ concentration limit.
+2. **Dual-Dispatch `Seesaw-MoE` on 3B-Active MoE (`benchmarks/exp4_seesaw_moe_dualplane.py`, `results/exp4_seesaw_moe.json`):** **KILLED FOR SPEED (QUALITY PASSED).** On `Ornith-1.5-35B-A3B-6bit`, 2-bit tail routing preserves `0.0057 nats` KL / `99.22%` top-1 (`exp9`), but dropping all 8 routed experts 6-bit → 2-bit only gained `1.03×` (`80.73 tok/s`), and dual `gather_qmm` dispatch slowed decode to `0.86×` (`67.42 tok/s`) due to `t0` dominance.
 3. **Unrotated Raw 2-Bit Self-Shadow Drafting (`results/exp3_bf16_target.json`):** **KILLED.** Naive `Q2-g64` without Parseval/Hadamard rotation collapses to `0.2%` acceptance (`13.88 tok/s`).
+4. **Exact Chronological Box+Sphere KV Certificates (`benchmarks/exp5_exact_cert_kv_32k.py`, `results/exp5_exact_cert_kv.json`):** **KILLED.** RoPE rotation spreads chronological 64-token key pages across $\mathbb{R}^{128}$ so exact worst-case `min/max` + sphere envelopes skip **`0.0%`** of pages at `eps=1e-3` across all layers (contrast with `exp13`'s `18.8×–22.7×` KV cut via 1-bit `popcount` screening + exact FP16 scoring!).
+5. **200 GB Spherical-Cone Contiguous FFN Capsule Atlas + SLC Rank-64 Compensator (`benchmarks/exp6_cone_atlas_and_slc_comp.py`, `results/exp6_cone_atlas.json`):** **KILLED.** On real `Qwen3-8B` middle layers (`L10/L18/L26`), 32 spherical cones barely beat static pruning (`rel_L2 = 0.692` vs `0.701` static vs `0.278` oracle at `keep=25%`), and extra compensator dispatches left `keep=25%` at `1.04×` vs full BF16 (`0.481` vs `0.502 ms`). *(First/last layers `L2/L34` were low-rank: `L2` `keep=50%` hit `0.008` beating oracle `0.019`.)*
+6. **240 GB "Multiplying Matrices Without Multiplying" Input-PQ 24 KB Slab-Sum Atlas (`benchmarks/exp7_maddness_ram_atlas.py`, `results/exp7_maddness_atlas.json`):** **KILLED ON BOTH SPEED AND ACCURACY** *(independently proposed by 3 frontier council models: Neon, Sol, Astra — and killed cleanly against their pre-declared gates!)*. On real M3 Ultra silicon, summing `G=512` random 24 KB contiguous slabs out of a `1.61 GB` FP16 atlas achieved only **`97.4 GB/s`** useful DRAM bandwidth (`0.1291 ms`, **2× slower than MLX Q4 `0.064 ms`!**; `g=16` hit `85.8 GB/s`) with `sealed_rel_L2 = 0.4762` (`cos = 0.878`). Even a 451 GB PCA-top256 + 2-stage RVQ hybrid had `sealed_rel_L2 = 0.2248`. Random 24 KB slab jumps across multi-GB RAM suffer a `~6×` TLB/bank penalty vs dense streaming.
 
 ---
 
-## Running Now (Wave 2B & Wave 3)
-- `exp9`: **Ornith-1.5-35B-A3B-6bit + DFlash** (6-layer parallel block-diffusion drafter — 1 pass for 16 tokens!) + exact MoE expert-union diagnostic vs position-shuffled control.
-- `exp14`: **Zero-`t0` CPU Suffix-Automaton Speculative Oracle** across `Qwen3-8B-Q4`, `Ornith-35B-A3B-6bit`, and **390 GB `GLM-5.3-4bit`**.
-- `exp5`, `exp11`, `exp13`: Long-context KV physics — exact adaptive KV certificates, Astra `cosh` moment certificate, and **Metal 4 Masullo-Shell 1-bit `popcount` Sign-KV** 32K–128K live Needle-in-a-Haystack.
-- `exp6`, `exp7`: 200–240 GB spare-RAM Seesaw Atlases (Spherical-Cone Contiguous Capsule Atlas + SLC compensator; "Multiplying Matrices Without Multiplying" Input-PQ 24 KB slab-sum Metal kernel).
+## Running Now (Wave 3C & Wave 4 Double-Down)
+- `exp15` (running now): **Opus 5.5 MAX's 12.125-bit & 11.125-bit 100.000% Bit-Exact Lossless BF16 Metal 4 Codec** (`23` compiled variants, zero bits lost!).
+- `exp11` (running now): **Astra 2B QERA Shared-Input Bessel Error Protection** across all 36 `Qwen3-8B` layers + **Astra 2C `cosh` Moment KV Certificate** + **Sol 2C Bit-Exact BF16 Rounding** + **K-means Clustered KV Pages**.
+- `exp16` (ready): **Stacked Zero-`t0` CPU Suffix + 6-Layer Parallel `DFlash-Q4` + Exact `GatedDeltaRollback`** on `Ornith-1.5-35B-A3B-6bit`.
+- `exp17` (building): **363 GiB 78-Layer Frontier `GLM-5.3-4bit-MLX`** full-400GB-RAM physics, MoE expert-union law, and Zero-`t0` speculative decoding.
+- `exp18` (building): **YaRN-Scaled 128K & 256K Live Verbatim NIAH** (`38.6 GB` KV!) with fused `Masullo-Shell Sign-KV v2`.

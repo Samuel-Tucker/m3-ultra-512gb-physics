@@ -1,0 +1,86 @@
+{
+  "accuracy": [
+    {
+      "config": "Raw_g8_C128_1stage (8x byte cut)",
+      "bytes_ratio_vs_bf16": 0.125,
+      "byte_reduction_x": 8.0,
+      "ram_multiplier_vs_bf16": 16.0,
+      "ram_gb_for_15gb_model": 240.0,
+      "sealed_rel_l2_err": 0.4762,
+      "sealed_cosine_sim": 0.8781
+    },
+    {
+      "config": "Raw_g8_C128_2stageRVQ (4x byte cut)",
+      "bytes_ratio_vs_bf16": 0.25,
+      "byte_reduction_x": 4.0,
+      "ram_multiplier_vs_bf16": 32.0,
+      "ram_gb_for_15gb_model": 480.0,
+      "sealed_rel_l2_err": 0.2503,
+      "sealed_cosine_sim": 0.9671
+    },
+    {
+      "config": "Raw_g16_C256_2stageRVQ (8x byte cut)",
+      "bytes_ratio_vs_bf16": 0.125,
+      "byte_reduction_x": 8.0,
+      "ram_multiplier_vs_bf16": 32.0,
+      "ram_gb_for_15gb_model": 480.0,
+      "sealed_rel_l2_err": 0.452,
+      "sealed_cosine_sim": 0.8883
+    },
+    {
+      "config": "PCA_top256Exact+g8_C128_1stage (5.3x)",
+      "bytes_ratio_vs_bf16": 0.1797,
+      "byte_reduction_x": 5.57,
+      "ram_multiplier_vs_bf16": 15.06,
+      "ram_gb_for_15gb_model": 225.9,
+      "sealed_rel_l2_err": 0.4181,
+      "sealed_cosine_sim": 0.9048
+    },
+    {
+      "config": "PCA_top256Exact+g8_C128_2stageRVQ (3.3x)",
+      "bytes_ratio_vs_bf16": 0.2969,
+      "byte_reduction_x": 3.37,
+      "ram_multiplier_vs_bf16": 30.06,
+      "ram_gb_for_15gb_model": 450.9,
+      "sealed_rel_l2_err": 0.2248,
+      "sealed_cosine_sim": 0.9734
+    },
+    {
+      "config": "PCA_top512Exact+g16_C256_2stageRVQ (4.3x)",
+      "bytes_ratio_vs_bf16": 0.2344,
+      "byte_reduction_x": 4.27,
+      "ram_multiplier_vs_bf16": 28.12,
+      "ram_gb_for_15gb_model": 421.9,
+      "sealed_rel_l2_err": 0.392,
+      "sealed_cosine_sim": 0.9166
+    }
+  ],
+  "hardware_bench": {
+    "dense_fp16_ms": 0.1786,
+    "dense_bw_gbs": 563.7,
+    "atlas_runs": [
+      {
+        "g": 8,
+        "G": 512,
+        "C": 128,
+        "atlas_gb": 1.61,
+        "payload_mb": 12.58,
+        "slab_ms": 0.1291,
+        "eff_gather_bw_gbs": 97.4,
+        "speedup_vs_dense_fp16": 1.38,
+        "correctness_max_diff": 0.01562
+      },
+      {
+        "g": 16,
+        "G": 256,
+        "C": 256,
+        "atlas_gb": 1.61,
+        "payload_mb": 6.29,
+        "slab_ms": 0.0733,
+        "eff_gather_bw_gbs": 85.8,
+        "speedup_vs_dense_fp16": 2.44,
+        "correctness_max_diff": 0.00781
+      }
+    ]
+  }
+}
