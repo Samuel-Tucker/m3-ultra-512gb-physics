@@ -157,6 +157,21 @@ Wiring Opus 5.5 MAX's lossless 12.135-bit BF16 Metal 4 codec into **all 253 line
 
 - **Headline:** **100.000% lossless full-BF16 `Qwen3-8B` runs at `94.07 tok/s` aggregate (`2.36×` over stock BF16, `90.5%` of lossy 4-bit Q4 speed!) — and on `rag_extract` hits `108.39 tok/s` (`2.72×`), OUTRIGHT BEATING lossy 4-bit quantized `Qwen3-8B-Q4` (`102.48 tok/s`) with ZERO quantization loss and `3.66 GB` less RAM!**
 
+### 12. 72-Dispatch Fused Metal 4 `Masullo-Shell Sign-KV v2` — Live YaRN 32K / 64K / 128K Verbatim NIAH & 256K (`38.65 GB` KV) `3.88×` E2E (`benchmarks/exp18_masullo_signkv_v2_256k.py`)
+Cutting `exp13`'s 4-pass screening pipeline in half (**144 → 72 Metal 4 dispatches/token**, 2/layer: tiled `popcount` + TG-SRAM histogram → fused global merge + exact FP16 sparse GQA) and enabling static YaRN RoPE scaling (`1×, 2×, 4×, 8×` from `original=32,768`) identically on Dense FP16 SDPA and Sign-KV v2 across **all 36 real layers of `Qwen3-4B-Base` Q4** (`results/exp18_masullo_signkv_v2_256k.json`, differential self-test `0` bit mismatches, `32/32` needle cluster, `0.00019` max diff):
+
+| Context (`S`, FP16 KV) | 36L Dense Attn | **Sign-KV v2 Attn** | **Attn Speedup** | Dense E2E | **Sign-KV v2 E2E** | **E2E Speedup** | **KV DRAM Cut** | Dense Recall | **Sign-KV v2 Recall** |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | :---: |
+| **32K** (`4.83 GB`, YaRN `1×`) | `7.30 ms` | **`2.91 ms`** | **`2.51×`** | `65.65 tok/s` | **`100.48 tok/s`** | **`1.53×`** | **`14.06×`** | YES | **YES (`ORCHID-3819`, verbatim)** |
+| **64K** (`9.66 GB`, YaRN `2×`) | `14.72 ms` | **`3.41 ms`** | **`4.31×`** | `42.13 tok/s` | **`71.87 tok/s`** | **`1.71×`** | **`20.31×`** | YES | **YES (`KESTREL-6140`, verbatim)** |
+| **128K** (`19.33 GB`, YaRN `4×`) | `32.53 ms` | **`4.84 ms`** | **`6.72×`** | `25.34 tok/s` | **`62.35 tok/s`** | **`2.46×`** | **`24.85×`** | YES | **YES (`QUASAR-7305`, verbatim!)** |
+| **256K** (`38.65 GB`, YaRN `8×`) | `81.45 ms` | **`6.85 ms`** | **`11.89×`** | `13.18 tok/s` | **`51.11 tok/s`** | **`3.88×`** | **`27.97×`** | NO (`11111...`) | Partial (`'MERIDIAN-12'`)* |
+
+- **Key Findings:**
+  1. **Halving dispatches (`144 → 72`) paid off immediately:** 32K E2E jumped from `78.8 tok/s` (`1.20×`) in `exp13` to **`100.48 tok/s` (`1.53×`)** — over 100 tok/s at 32K context!
+  2. **128K (`19.33 GB` KV) Live Verbatim NIAH Solved:** With `4×` YaRN, Sign-KV v2 matches Dense FP16 SDPA char-for-char (`' QUASAR-7305. All authorised operators must record the exact passcode QUASAR-73'`) at **`62.35 tok/s` (`2.46×` E2E, `6.72×` attn, `24.85×` KV DRAM cut)**!
+  3. **\*256K (`38.65 GB` FP16 KV) Sparse Denoising Effect:** At `8×` extrapolated YaRN (`262,144` tokens), exact Dense FP16 SDPA collapsed completely (`' 11111111111111111111111'` at `13.18 tok/s`), whereas ALL FOUR Sign-KV v2 arms (`K=256/512`, `norm=on/off`) filtered out `99.8%` of distractors and recovered the buried codeword `'MERIDIAN'` from token `131,029` (e.g. `" 'MERIDIAN-12'."` at `46–51 tok/s`, **`3.88×` E2E / `11.89×` attn / `27.97×` KV cut** — missing only the 4 numeric digits beyond `8×` RoPE extrapolation).
+
 ---
 
 ## 10-Model Frontier Council
@@ -176,7 +191,6 @@ Full synthesis and empirical grading of all 10 independent max-thinking council 
 
 ---
 
-## Running Now (Wave 5 Final Double-Downs)
-- `exp18` (running now on `ultra`): **YaRN-Scaled 32K / 64K / 128K / 256K Live Verbatim NIAH** (`38.6 GB` FP16 KV!) with **72-dispatch** fused `Masullo-Shell Sign-KV v2`.
-- `exp20` (staged on `ultra`, next): **Parseval-RHT 2.0-Bit Zero-FMA Metal 4 TG-SRAM LUT + Shared QERA Bessel Rank-32** end-to-end across all 36 layers of `Qwen3-8B-Base` (testing Q4-grade quality at ~2× Q4 speed!).
-- `exp17b` (building on Codex Sol): **`169 GB` 45-Layer 288-Expert Frontier `GLM-5.3-Flash-MLX-4bit-MTP`** (`215 GiB` under macOS's `384 GiB` default `iogpu.wired_limit_mb=0` cap — after catching `389.59 GiB` `GLM-5.3-4bit` paging at `0.19 tok/s` when `5.6 GiB` over the default wired limit!).
+## Running Now (Final Wave 5 Benchmarks)
+- `exp20` (running now on `ultra`): **Parseval-RHT 2.0-Bit Zero-FMA Metal 4 TG-SRAM LUT + Shared QERA Bessel Rank-32** end-to-end across all 36 layers of `Qwen3-8B-Base` (testing Q4-grade quality at ~2× Q4 speed!).
+- `exp17b` (staged on `ultra`, next): **`169 GB` 45-Layer 288-Expert Frontier `GLM-5.3-Flash-MLX-4bit-MTP`** (`215 GiB` under macOS's `384 GiB` default `iogpu.wired_limit_mb=0` cap — after catching `389.59 GiB` `GLM-5.3-4bit` paging at `0.19 tok/s` when `5.6 GiB` over the default wired limit!).

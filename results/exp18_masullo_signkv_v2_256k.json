@@ -1,0 +1,208 @@
+{
+  "experiment": "exp18_masullo_signkv_v2_256k",
+  "model": "<HOME>/.cache/huggingface/hub/models--Qwen--Qwen3-4B-Base/snapshots/906bfd4b4dc7f14ee4320094d8b41684abff8539",
+  "dispatches_per_token": 72,
+  "contexts": {
+    "32768": {
+      "context_length": 32768,
+      "passcode": "ORCHID-3819",
+      "needle_pos": 16341,
+      "needle_depth_pct": 49.8687744140625,
+      "dense_attn_ms": 7.297791991732083,
+      "dense_e2e_tok_s": 65.6498231268572,
+      "dense_recall": true,
+      "dense_answer": " ORCHID-3819. All authorised operators must record the exact passcode ORCHID-38",
+      "arms": {
+        "k256_norm_on": {
+          "top_k": 256,
+          "use_knorm": true,
+          "attn_ms": 2.907292000600137,
+          "attn_speedup": 2.51016822191429,
+          "e2e_tok_s": 100.48189607716897,
+          "e2e_speedup": 1.5305737516307496,
+          "dense_kv_mb": 4831.838208,
+          "sparse_kv_mb_low": 230.381568,
+          "sparse_kv_mb_high": 343.627776,
+          "kv_cut_disjoint_x": 14.061256235584402,
+          "scratch_mb": 47.0016,
+          "recall": true,
+          "answer": " ORCHID-3819. All authorised operators must record the exact passcode ORCHID-38"
+        },
+        "k256_norm_off": {
+          "top_k": 256,
+          "use_knorm": false,
+          "attn_ms": 2.839708002284169,
+          "attn_speedup": 2.5699092955550276,
+          "e2e_tok_s": 87.75570531933853,
+          "e2e_speedup": 1.3367241698392005,
+          "dense_kv_mb": 4831.838208,
+          "sparse_kv_mb_low": 211.59936,
+          "sparse_kv_mb_high": 324.845568,
+          "kv_cut_disjoint_x": 14.874262369496142,
+          "scratch_mb": 47.0016,
+          "recall": true,
+          "answer": " ORCHID-3819. All authorized operators must record the exact passcode ORCHID-38"
+        }
+      }
+    },
+    "65536": {
+      "context_length": 65536,
+      "passcode": "KESTREL-6140",
+      "needle_pos": 32725,
+      "needle_depth_pct": 49.93438720703125,
+      "dense_attn_ms": 14.719875005539507,
+      "dense_e2e_tok_s": 42.12791646121118,
+      "dense_recall": true,
+      "dense_answer": " KESTREL-6140. All authorised operators must record the exact passcode KESTREL-61",
+      "arms": {
+        "k256_norm_on": {
+          "top_k": 256,
+          "use_knorm": true,
+          "attn_ms": 3.436959013924934,
+          "attn_speedup": 4.282819476723908,
+          "e2e_tok_s": 67.9442057628978,
+          "e2e_speedup": 1.6128071708805416,
+          "dense_kv_mb": 9663.676416,
+          "sparse_kv_mb_low": 400.25088,
+          "sparse_kv_mb_high": 513.497088,
+          "kv_cut_disjoint_x": 18.819340249111598,
+          "scratch_mb": 94.18752,
+          "recall": true,
+          "answer": " KESTREL-6140. All authorised operators must record the exact passcode KESTREL-61"
+        },
+        "k256_norm_off": {
+          "top_k": 256,
+          "use_knorm": false,
+          "attn_ms": 3.412666992517188,
+          "attn_speedup": 4.313305411226809,
+          "e2e_tok_s": 71.86973353058539,
+          "e2e_speedup": 1.7059883224170052,
+          "dense_kv_mb": 9663.676416,
+          "sparse_kv_mb_low": 362.594304,
+          "sparse_kv_mb_high": 475.840512,
+          "kv_cut_disjoint_x": 20.30864580105361,
+          "scratch_mb": 94.18752,
+          "recall": true,
+          "answer": " KESTREL-6140. All authorised operators must record the exact passcode KESTREL-61"
+        }
+      }
+    },
+    "131072": {
+      "context_length": 131072,
+      "passcode": "QUASAR-7305",
+      "needle_pos": 65493,
+      "needle_depth_pct": 49.967193603515625,
+      "dense_attn_ms": 32.53170799871441,
+      "dense_e2e_tok_s": 25.34170405693569,
+      "dense_recall": true,
+      "dense_answer": " QUASAR-7305. All authorised operators must record the exact passcode QUASAR-73",
+      "arms": {
+        "k256_norm_on": {
+          "top_k": 256,
+          "use_knorm": true,
+          "attn_ms": 5.088417005026713,
+          "attn_speedup": 6.39328654993826,
+          "e2e_tok_s": 61.89419315259967,
+          "e2e_speedup": 2.4423848141206608,
+          "dense_kv_mb": 19327.352832,
+          "sparse_kv_mb_low": 739.989504,
+          "sparse_kv_mb_high": 853.235712,
+          "kv_cut_disjoint_x": 22.651832969691732,
+          "scratch_mb": 188.55936,
+          "recall": true,
+          "answer": " QUASAR-7305. All authorised operators must record the exact passcode QUASAR-73"
+        },
+        "k256_norm_off": {
+          "top_k": 256,
+          "use_knorm": false,
+          "attn_ms": 4.837708009290509,
+          "attn_speedup": 6.724611724444581,
+          "e2e_tok_s": 62.353210796061575,
+          "e2e_speedup": 2.4604979466247188,
+          "dense_kv_mb": 19327.352832,
+          "sparse_kv_mb_low": 664.584192,
+          "sparse_kv_mb_high": 777.8304,
+          "kv_cut_disjoint_x": 24.84777251184834,
+          "scratch_mb": 188.55936,
+          "recall": true,
+          "answer": " QUASAR-7305. All authorised operators must record the exact passcode QUASAR-73"
+        }
+      }
+    },
+    "262144": {
+      "context_length": 262144,
+      "passcode": "MERIDIAN-8527",
+      "needle_pos": 131029,
+      "needle_depth_pct": 49.98359680175781,
+      "dense_attn_ms": 81.45187499758322,
+      "dense_e2e_tok_s": 13.184455167903645,
+      "dense_recall": false,
+      "dense_answer": " 11111111111111111111111",
+      "arms": {
+        "k256_norm_on": {
+          "top_k": 256,
+          "use_knorm": true,
+          "attn_ms": 6.92854099906981,
+          "attn_speedup": 11.755992352288674,
+          "e2e_tok_s": 50.4542458802462,
+          "e2e_speedup": 3.8267979402798886,
+          "dense_kv_mb": 38654.705664,
+          "sparse_kv_mb_low": 1419.466752,
+          "sparse_kv_mb_high": 1532.71296,
+          "kv_cut_disjoint_x": 25.21979435993025,
+          "scratch_mb": 377.30304,
+          "recall": false,
+          "answer": " 'MERidian'. Use '97' as the base for the first 99999999"
+        },
+        "k256_norm_off": {
+          "top_k": 256,
+          "use_knorm": false,
+          "attn_ms": 6.848958000773564,
+          "attn_speedup": 11.892593733000485,
+          "e2e_tok_s": 51.112386984613664,
+          "e2e_speedup": 3.876715900179335,
+          "dense_kv_mb": 38654.705664,
+          "sparse_kv_mb_low": 1268.563968,
+          "sparse_kv_mb_high": 1381.810176,
+          "kv_cut_disjoint_x": 27.97396222388219,
+          "scratch_mb": 377.30304,
+          "recall": false,
+          "answer": " 'MERidian'. \n\n=== PASSKEY ===\n\n#11401: 11."
+        },
+        "k512_norm_on": {
+          "top_k": 512,
+          "use_knorm": true,
+          "attn_ms": 8.508458005962893,
+          "attn_speedup": 9.573047776753455,
+          "e2e_tok_s": 46.22491624472609,
+          "e2e_speedup": 3.5060164152445554,
+          "dense_kv_mb": 38654.705664,
+          "sparse_kv_mb_low": 1457.215488,
+          "sparse_kv_mb_high": 1683.707904,
+          "kv_cut_disjoint_x": 22.95808291460037,
+          "scratch_mb": 377.30304,
+          "recall": false,
+          "answer": " 'MERidian' and the official base passcode is '123456789101"
+        },
+        "k512_norm_off": {
+          "top_k": 512,
+          "use_knorm": false,
+          "attn_ms": 7.3707499977899715,
+          "attn_speedup": 11.050690231252663,
+          "e2e_tok_s": 46.005875671895886,
+          "e2e_speedup": 3.48940286769627,
+          "dense_kv_mb": 38654.705664,
+          "sparse_kv_mb_low": 1306.312704,
+          "sparse_kv_mb_high": 1532.80512,
+          "kv_cut_disjoint_x": 25.218278018278017,
+          "scratch_mb": 377.30304,
+          "recall": false,
+          "answer": " 'MERIDIAN-12'."
+        }
+      }
+    }
+  },
+  "missed_contexts": [
+    262144
+  ]
+}
