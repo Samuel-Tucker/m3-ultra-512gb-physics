@@ -1,0 +1,4543 @@
+{
+  "experiment": 20,
+  "schema_version": 1,
+  "checkpoint": "<HOME>/.cache/huggingface/hub/models--Qwen--Qwen3-8B-Base/snapshots/49e3418fbbbca6ecbdf9608b4d22e5a407081db4",
+  "host": "mac-studio-ultra-1",
+  "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+  "packages": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2",
+    "numpy": "2.5.4"
+  },
+  "metal_device": {
+    "device_name": "Apple M3 Ultra",
+    "max_recommended_working_set_size": 498216206336,
+    "memory_size": 549755813888,
+    "architecture": "applegpu_g15d",
+    "max_buffer_length": 373662154752,
+    "resource_limit": 499000
+  },
+  "seed": 20,
+  "scope": {
+    "layers": 36,
+    "linear_layers": 252,
+    "projection_paths": [
+      "self_attn.q_proj",
+      "self_attn.k_proj",
+      "self_attn.v_proj",
+      "self_attn.o_proj",
+      "mlp.gate_proj",
+      "mlp.up_proj",
+      "mlp.down_proj"
+    ],
+    "linear_weights": 6945767424,
+    "calibration_tokens": 400,
+    "sealed_tokens": 200,
+    "calibration_ids_sha256": "6dcea01aa1e940301b86e46837e1cc0d7f6cd1c1f9889b7f8a1ebad5490d184f",
+    "sealed_ids_sha256": "7b10f0438c05765c6d12e1d3433736c13b0c8f796a46f48b14285c7a8f3dc1db",
+    "kl_definition": "KL(BF16 || candidate), natural logs, full vocabulary, FP64",
+    "rht": "signed Parseval FWHT in 4096-wide orthonormal blocks",
+    "lut": "two additive 16-centroid 4-vector codebooks, FP16 row RMS scales",
+    "qera": "shared response randomized SVD, pseudoinverse lift/QR, least squares; BF16 factors"
+  },
+  "fit_diagnostics": {
+    "0": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6371118392734563,
+          "basis_orthogonality_frobenius_error": 0.002421973831622778,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4403435838651236,
+          "basis_orthogonality_frobenius_error": 0.0012446682128444545,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3842645161966989,
+          "basis_orthogonality_frobenius_error": 0.0024306137179078255,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.379528346382655e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.556352957181513,
+          "basis_orthogonality_frobenius_error": 0.002750820939285637,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.41627233775367645,
+          "basis_orthogonality_frobenius_error": 0.0012785625154486016,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.356054135558783,
+          "basis_orthogonality_frobenius_error": 0.0024679149166090064,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.520294193919169e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7780293154631339,
+          "basis_orthogonality_frobenius_error": 0.002323972163494328,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7408350681028205,
+          "basis_orthogonality_frobenius_error": 0.001262758358411147,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6423267979639514,
+          "basis_orthogonality_frobenius_error": 0.00243149014504015,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.19274184261592e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7930262460209647,
+          "basis_orthogonality_frobenius_error": 0.0056543300098748995,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7454529859667075,
+          "basis_orthogonality_frobenius_error": 0.0007142085217604175,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6400595159048552,
+          "basis_orthogonality_frobenius_error": 0.0014141046032538924,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 5.971948354006687e-07
+      }
+    },
+    "1": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5667502439235425,
+          "basis_orthogonality_frobenius_error": 0.004502644543172464,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.41791549865971783,
+          "basis_orthogonality_frobenius_error": 0.0013239169566254133,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.346696804175528,
+          "basis_orthogonality_frobenius_error": 0.002479209218426093,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.63278112921779e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6411940532746037,
+          "basis_orthogonality_frobenius_error": 0.002014552583180535,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5925342493452287,
+          "basis_orthogonality_frobenius_error": 0.0013074062711745476,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.48894119008443926,
+          "basis_orthogonality_frobenius_error": 0.0024240796544841366,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.129928592931609e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.19052206135657943,
+          "basis_orthogonality_frobenius_error": 0.005610896418017474,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.09644774410591823,
+          "basis_orthogonality_frobenius_error": 0.0012570733198253383,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.08105329155131737,
+          "basis_orthogonality_frobenius_error": 0.0024761695805684404,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.3153780494509161e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5447955098968278,
+          "basis_orthogonality_frobenius_error": 0.008115508274083789,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.3465607210364951,
+          "basis_orthogonality_frobenius_error": 0.0007365948182026117,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.2548935029614686,
+          "basis_orthogonality_frobenius_error": 0.0013825938306211258,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 4.614942246679029e-07
+      }
+    },
+    "2": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6747533000770184,
+          "basis_orthogonality_frobenius_error": 0.0024525149130177164,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5348418208356888,
+          "basis_orthogonality_frobenius_error": 0.001312089365596308,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.45688736658048773,
+          "basis_orthogonality_frobenius_error": 0.002461744613920952,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.80524040013345e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6167174737629483,
+          "basis_orthogonality_frobenius_error": 0.001876390026990481,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5862051644211619,
+          "basis_orthogonality_frobenius_error": 0.0012227737214433351,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4813510092683184,
+          "basis_orthogonality_frobenius_error": 0.002367721943559992,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.338579110470111e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.17633210942541502,
+          "basis_orthogonality_frobenius_error": 0.005419308256187761,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.09513866654072715,
+          "basis_orthogonality_frobenius_error": 0.0012822010298138527,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.0809801549710875,
+          "basis_orthogonality_frobenius_error": 0.002435866938184901,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.4304168764533343e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6278860086835137,
+          "basis_orthogonality_frobenius_error": 0.004683534770834837,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5098601602699161,
+          "basis_orthogonality_frobenius_error": 0.000706431337623622,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4224734559789727,
+          "basis_orthogonality_frobenius_error": 0.0013733126496282084,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 4.4966016215757547e-07
+      }
+    },
+    "3": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5995166458246777,
+          "basis_orthogonality_frobenius_error": 0.003070301714445843,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.44671117115521847,
+          "basis_orthogonality_frobenius_error": 0.0012489561547417768,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3757787473735232,
+          "basis_orthogonality_frobenius_error": 0.002395960308167151,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.552268989713524e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.573350562306843,
+          "basis_orthogonality_frobenius_error": 0.002208284818562332,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5383498097995072,
+          "basis_orthogonality_frobenius_error": 0.0012341883785231163,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.43847075916702716,
+          "basis_orthogonality_frobenius_error": 0.002468417245489711,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.78732090649855e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.20964195717086528,
+          "basis_orthogonality_frobenius_error": 0.00577005787565163,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.13338286397392193,
+          "basis_orthogonality_frobenius_error": 0.0013173802150061025,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.11329631683121368,
+          "basis_orthogonality_frobenius_error": 0.002436954113926786,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.4388853755355003e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6444275148787559,
+          "basis_orthogonality_frobenius_error": 0.010021451503455212,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6283859642312342,
+          "basis_orthogonality_frobenius_error": 0.0007104516776171386,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4835464126468436,
+          "basis_orthogonality_frobenius_error": 0.0014118867263403893,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.248632279101992e-07
+      }
+    },
+    "4": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6800105495960799,
+          "basis_orthogonality_frobenius_error": 0.0020703571917919804,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5323627342094586,
+          "basis_orthogonality_frobenius_error": 0.0012219157636120896,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4594860962513991,
+          "basis_orthogonality_frobenius_error": 0.0023750220015666423,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.415186051598242e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5986335930411891,
+          "basis_orthogonality_frobenius_error": 0.001857182700338202,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5777140058544682,
+          "basis_orthogonality_frobenius_error": 0.0012926093258822046,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.47291018872715124,
+          "basis_orthogonality_frobenius_error": 0.002440284025176966,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.727936188648456e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.29100312540453543,
+          "basis_orthogonality_frobenius_error": 0.005929801126239245,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.17263032631816227,
+          "basis_orthogonality_frobenius_error": 0.0011988465804543354,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.14869842474207753,
+          "basis_orthogonality_frobenius_error": 0.002429804947747833,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.3235942831076022e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.719721322010455,
+          "basis_orthogonality_frobenius_error": 0.004982077677708283,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6847208557214347,
+          "basis_orthogonality_frobenius_error": 0.000695284901707089,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5816027743654113,
+          "basis_orthogonality_frobenius_error": 0.001373445950679783,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.61417509224746e-07
+      }
+    },
+    "5": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5930346596515139,
+          "basis_orthogonality_frobenius_error": 0.0027152405779805066,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.45502528211953946,
+          "basis_orthogonality_frobenius_error": 0.0012288617512130487,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3871566807270675,
+          "basis_orthogonality_frobenius_error": 0.002352796641617957,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.729405953742286e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6000808302341836,
+          "basis_orthogonality_frobenius_error": 0.00203881238184772,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5608231154109509,
+          "basis_orthogonality_frobenius_error": 0.001241252839745021,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.45774414794690593,
+          "basis_orthogonality_frobenius_error": 0.0025001063072452407,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.717143810238552e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.4265160060488881,
+          "basis_orthogonality_frobenius_error": 0.005090014166528559,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.22509883695484562,
+          "basis_orthogonality_frobenius_error": 0.001192838758005161,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.19630911593460296,
+          "basis_orthogonality_frobenius_error": 0.0023779029101468315,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.37206752340875e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8032536010308637,
+          "basis_orthogonality_frobenius_error": 0.0034267174498973283,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7658264273037757,
+          "basis_orthogonality_frobenius_error": 0.0007197832103122484,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.672014943141467,
+          "basis_orthogonality_frobenius_error": 0.001425639857233615,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.715789881363054e-07
+      }
+    },
+    "6": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6240704823859624,
+          "basis_orthogonality_frobenius_error": 0.0034390451787989387,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5072897911927658,
+          "basis_orthogonality_frobenius_error": 0.0012463958886126626,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4308610767169903,
+          "basis_orthogonality_frobenius_error": 0.0024309140890660936,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.873503225838114e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7039734366878576,
+          "basis_orthogonality_frobenius_error": 0.0019452129387890955,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6723032719430799,
+          "basis_orthogonality_frobenius_error": 0.0012348207672936038,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5674853318159785,
+          "basis_orthogonality_frobenius_error": 0.00241795770177708,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.679963073925424e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.478239594151609,
+          "basis_orthogonality_frobenius_error": 0.0022972035088172924,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.22361223802820115,
+          "basis_orthogonality_frobenius_error": 0.0012244852247561787,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.19657749121867846,
+          "basis_orthogonality_frobenius_error": 0.002394094615960919,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2228066402009775e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.21359824424367127,
+          "basis_orthogonality_frobenius_error": 0.003037841050379348,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.018957996032727548,
+          "basis_orthogonality_frobenius_error": 0.0007469834851351285,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.016847756748082594,
+          "basis_orthogonality_frobenius_error": 0.0014368317939075612,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 5.472005098578228e-07
+      }
+    },
+    "7": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5322014442936891,
+          "basis_orthogonality_frobenius_error": 0.003942908023826551,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.41046564693152215,
+          "basis_orthogonality_frobenius_error": 0.0013057227204282126,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3494341507663135,
+          "basis_orthogonality_frobenius_error": 0.0024360352963709643,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.953657555923397e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6816044226066085,
+          "basis_orthogonality_frobenius_error": 0.001980494804220825,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6629454850895989,
+          "basis_orthogonality_frobenius_error": 0.0012392376347850644,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5467205465308411,
+          "basis_orthogonality_frobenius_error": 0.0024329790959504976,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.817579827112723e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6128776527358651,
+          "basis_orthogonality_frobenius_error": 0.001719888094535618,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.24257665937488698,
+          "basis_orthogonality_frobenius_error": 0.0012564265008770251,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.21471819846258725,
+          "basis_orthogonality_frobenius_error": 0.0024049171679825696,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2190043213960711e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8311716300707435,
+          "basis_orthogonality_frobenius_error": 0.002192980895404429,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.816976887495554,
+          "basis_orthogonality_frobenius_error": 0.0007081967004844513,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7239115479205374,
+          "basis_orthogonality_frobenius_error": 0.001387046691732495,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.821950051438374e-07
+      }
+    },
+    "8": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5876043834707367,
+          "basis_orthogonality_frobenius_error": 0.0028256610498627517,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4626715954007257,
+          "basis_orthogonality_frobenius_error": 0.001187953874783416,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4001714657185935,
+          "basis_orthogonality_frobenius_error": 0.0023761671783409668,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.645605648474724e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6126374631413443,
+          "basis_orthogonality_frobenius_error": 0.00183932307710697,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6067065786813092,
+          "basis_orthogonality_frobenius_error": 0.001282911451949476,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4993705758143401,
+          "basis_orthogonality_frobenius_error": 0.0024563965988115065,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.09604555977366e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.753718629222183,
+          "basis_orthogonality_frobenius_error": 0.0024775015991843354,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6931836689944761,
+          "basis_orthogonality_frobenius_error": 0.00127228305635444,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6102257880047981,
+          "basis_orthogonality_frobenius_error": 0.0024056439310384354,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1774957166196752e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8337034966373971,
+          "basis_orthogonality_frobenius_error": 0.0025178806827069857,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.8196668227540341,
+          "basis_orthogonality_frobenius_error": 0.0007063122207664134,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7300679781593851,
+          "basis_orthogonality_frobenius_error": 0.001408944401687085,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.813013641497856e-07
+      }
+    },
+    "9": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5889173924597663,
+          "basis_orthogonality_frobenius_error": 0.0028999160471720035,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4610981012931272,
+          "basis_orthogonality_frobenius_error": 0.0012134557846643,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.39746780027422934,
+          "basis_orthogonality_frobenius_error": 0.002409255479213056,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.659106405025622e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5733587939162617,
+          "basis_orthogonality_frobenius_error": 0.0022987509014918144,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5667923187713343,
+          "basis_orthogonality_frobenius_error": 0.0012770058764687807,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4666060451920329,
+          "basis_orthogonality_frobenius_error": 0.0024534804193152805,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.366674050805589e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7149315633860156,
+          "basis_orthogonality_frobenius_error": 0.0020542707819449406,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6068912163502598,
+          "basis_orthogonality_frobenius_error": 0.0012362647438942953,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5361729001913494,
+          "basis_orthogonality_frobenius_error": 0.002515454029673194,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1483895982265496e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8116296743924655,
+          "basis_orthogonality_frobenius_error": 0.002261241670738423,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.8005797710475596,
+          "basis_orthogonality_frobenius_error": 0.0007098415056548664,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7157312287365565,
+          "basis_orthogonality_frobenius_error": 0.001392118607344151,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.653046548508893e-07
+      }
+    },
+    "10": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5625921171979591,
+          "basis_orthogonality_frobenius_error": 0.004050418844142886,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.43044807836369486,
+          "basis_orthogonality_frobenius_error": 0.0012633316880315045,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3733770517019444,
+          "basis_orthogonality_frobenius_error": 0.002493862888003631,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.739875143195949e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.596281293561279,
+          "basis_orthogonality_frobenius_error": 0.0020474152911011193,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5923271679970402,
+          "basis_orthogonality_frobenius_error": 0.0012511682679443332,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.49443674268596827,
+          "basis_orthogonality_frobenius_error": 0.002446468426709925,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.831019921907181e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6964698970431552,
+          "basis_orthogonality_frobenius_error": 0.002146605893301381,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6061888060052337,
+          "basis_orthogonality_frobenius_error": 0.0012722198541090608,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5325915135945385,
+          "basis_orthogonality_frobenius_error": 0.0024466960273590173,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1497968432265896e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.786644888125297,
+          "basis_orthogonality_frobenius_error": 0.002236340732591856,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7719239900480978,
+          "basis_orthogonality_frobenius_error": 0.0007664240053169852,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6846029866202151,
+          "basis_orthogonality_frobenius_error": 0.001425059906681569,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.532686934952271e-07
+      }
+    },
+    "11": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5659692338440196,
+          "basis_orthogonality_frobenius_error": 0.0028056731808289883,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4399329064440612,
+          "basis_orthogonality_frobenius_error": 0.0011906950743279057,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.375567887337613,
+          "basis_orthogonality_frobenius_error": 0.0023973166208033033,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.694034502816877e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5758403711237615,
+          "basis_orthogonality_frobenius_error": 0.0018396078291333924,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.570740903837537,
+          "basis_orthogonality_frobenius_error": 0.0012673733262530637,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.46615608429399225,
+          "basis_orthogonality_frobenius_error": 0.002506359301499347,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.787262358744783e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7019170828309919,
+          "basis_orthogonality_frobenius_error": 0.002809722723622377,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.625812189586174,
+          "basis_orthogonality_frobenius_error": 0.0013012123693961189,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5467317199358817,
+          "basis_orthogonality_frobenius_error": 0.0024258602693508335,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1594447229416343e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7870437811804551,
+          "basis_orthogonality_frobenius_error": 0.002207532334150356,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7739966342248785,
+          "basis_orthogonality_frobenius_error": 0.0007288389379501994,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6838621747693339,
+          "basis_orthogonality_frobenius_error": 0.0014245104497657146,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.465090866333233e-07
+      }
+    },
+    "12": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5361295801231016,
+          "basis_orthogonality_frobenius_error": 0.0033742034068214924,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4132771665325533,
+          "basis_orthogonality_frobenius_error": 0.0012672117695839316,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3508834125812082,
+          "basis_orthogonality_frobenius_error": 0.0024588314967252164,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.680044308947727e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5361451044008506,
+          "basis_orthogonality_frobenius_error": 0.002231340680338658,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5325680565441974,
+          "basis_orthogonality_frobenius_error": 0.001315582561398105,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.43887468948889047,
+          "basis_orthogonality_frobenius_error": 0.0024808301684746373,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.0708146845576923e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6977979630698768,
+          "basis_orthogonality_frobenius_error": 0.0017413284298537241,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6290138527597823,
+          "basis_orthogonality_frobenius_error": 0.0012089001979860784,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5478647318503659,
+          "basis_orthogonality_frobenius_error": 0.002434263293826508,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.175106103028257e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7703924361900373,
+          "basis_orthogonality_frobenius_error": 0.0018745749288520187,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7560911368048344,
+          "basis_orthogonality_frobenius_error": 0.0007135346310199999,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6704357272438366,
+          "basis_orthogonality_frobenius_error": 0.001408519141911058,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.56499937019167e-07
+      }
+    },
+    "13": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5516928028551893,
+          "basis_orthogonality_frobenius_error": 0.003176620529912443,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4253293900523273,
+          "basis_orthogonality_frobenius_error": 0.00125507180962372,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3597422926875638,
+          "basis_orthogonality_frobenius_error": 0.0024113189015637286,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.755407959858444e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5106262799545388,
+          "basis_orthogonality_frobenius_error": 0.002970572144029893,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5148659317015227,
+          "basis_orthogonality_frobenius_error": 0.0012767326323818418,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4095843593315753,
+          "basis_orthogonality_frobenius_error": 0.0024053693142376638,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.0702941127792413e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6975833106998548,
+          "basis_orthogonality_frobenius_error": 0.002506053410741896,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6305528199919287,
+          "basis_orthogonality_frobenius_error": 0.0012919894827982158,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5481179215173086,
+          "basis_orthogonality_frobenius_error": 0.002462750980712967,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1899261493582578e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8067968294218377,
+          "basis_orthogonality_frobenius_error": 0.0016128310233419006,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7948291354600755,
+          "basis_orthogonality_frobenius_error": 0.0007565876058197271,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7095710593589037,
+          "basis_orthogonality_frobenius_error": 0.00145691956721944,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.686054225830182e-07
+      }
+    },
+    "14": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5170568886062652,
+          "basis_orthogonality_frobenius_error": 0.0030449909549386885,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.40902552542048287,
+          "basis_orthogonality_frobenius_error": 0.0011649263039359445,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3480492631636862,
+          "basis_orthogonality_frobenius_error": 0.0023571050617405965,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.646557847186529e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5647429740408939,
+          "basis_orthogonality_frobenius_error": 0.0023861631581222655,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5686707873381357,
+          "basis_orthogonality_frobenius_error": 0.001288307545821422,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.467418717248154,
+          "basis_orthogonality_frobenius_error": 0.0024558390774488074,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.026036188868939e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6997450774392222,
+          "basis_orthogonality_frobenius_error": 0.0022840994769408192,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6331984290402125,
+          "basis_orthogonality_frobenius_error": 0.0012256683671330124,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5535117351126044,
+          "basis_orthogonality_frobenius_error": 0.0024369224511393383,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.178112063509012e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7741403850726825,
+          "basis_orthogonality_frobenius_error": 0.0013852028245579483,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7617249476121511,
+          "basis_orthogonality_frobenius_error": 0.0007437625311278986,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.680243480319845,
+          "basis_orthogonality_frobenius_error": 0.0013993459795615354,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.069058590218425e-07
+      }
+    },
+    "15": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5133968090997925,
+          "basis_orthogonality_frobenius_error": 0.004049266054003037,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.40245011853123563,
+          "basis_orthogonality_frobenius_error": 0.0012256885591341751,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3417970312929602,
+          "basis_orthogonality_frobenius_error": 0.0024415698564461,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.855131643270833e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5187948250909263,
+          "basis_orthogonality_frobenius_error": 0.0034955257901017095,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5174705865341992,
+          "basis_orthogonality_frobenius_error": 0.0012443901067663455,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4121387603572665,
+          "basis_orthogonality_frobenius_error": 0.0024302568645228643,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.0373265413210541e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7052199385852106,
+          "basis_orthogonality_frobenius_error": 0.002431355291665297,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6445196329916186,
+          "basis_orthogonality_frobenius_error": 0.0012525354144961895,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5602621688818796,
+          "basis_orthogonality_frobenius_error": 0.00241819990446821,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2030676902981053e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8119914204663646,
+          "basis_orthogonality_frobenius_error": 0.0030945645121304823,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7946108961451219,
+          "basis_orthogonality_frobenius_error": 0.0007074817171092596,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7096501521029728,
+          "basis_orthogonality_frobenius_error": 0.0014032416240325008,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.718366051938976e-07
+      }
+    },
+    "16": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5510701372164013,
+          "basis_orthogonality_frobenius_error": 0.003811667730844742,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.44432016781784217,
+          "basis_orthogonality_frobenius_error": 0.0012447157071233427,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.38204825585691654,
+          "basis_orthogonality_frobenius_error": 0.0024113959116359783,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.796223183321397e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5301662527638725,
+          "basis_orthogonality_frobenius_error": 0.0019525607046233585,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5308303956946177,
+          "basis_orthogonality_frobenius_error": 0.0012820310615761887,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.43098623879167863,
+          "basis_orthogonality_frobenius_error": 0.0024879096576551187,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.870886391851206e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6893008750357038,
+          "basis_orthogonality_frobenius_error": 0.003596559935964564,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6204398597879234,
+          "basis_orthogonality_frobenius_error": 0.0012886707018187403,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5411164245851672,
+          "basis_orthogonality_frobenius_error": 0.002377615814848563,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1711174889071672e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7815568212317687,
+          "basis_orthogonality_frobenius_error": 0.001564245978033939,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.46454148603067624,
+          "basis_orthogonality_frobenius_error": 0.0007067670847117636,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.41475222445557336,
+          "basis_orthogonality_frobenius_error": 0.001395448396662118,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 3.8784517607508825e-07
+      }
+    },
+    "17": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5450413864940201,
+          "basis_orthogonality_frobenius_error": 0.003607263584905989,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.43978739375532333,
+          "basis_orthogonality_frobenius_error": 0.0012835663287111981,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.376335499441607,
+          "basis_orthogonality_frobenius_error": 0.0024753498314940944,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.918897042826415e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.45491944513329957,
+          "basis_orthogonality_frobenius_error": 0.002115203206473121,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4564166546286303,
+          "basis_orthogonality_frobenius_error": 0.001276502905508461,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3655253878373225,
+          "basis_orthogonality_frobenius_error": 0.002512668303363817,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.0773526148250047e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6859456836842204,
+          "basis_orthogonality_frobenius_error": 0.002470635210961709,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6293966438697542,
+          "basis_orthogonality_frobenius_error": 0.001204870991186099,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5476139049844772,
+          "basis_orthogonality_frobenius_error": 0.0023836489091849755,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1996260381718256e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7962292754392778,
+          "basis_orthogonality_frobenius_error": 0.0016969930833324928,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7831839212628231,
+          "basis_orthogonality_frobenius_error": 0.0006729024544890996,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7002937350805495,
+          "basis_orthogonality_frobenius_error": 0.0013742328395532077,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.603756014421702e-07
+      }
+    },
+    "18": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5080987042259202,
+          "basis_orthogonality_frobenius_error": 0.00419423939315147,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.41066491133415817,
+          "basis_orthogonality_frobenius_error": 0.001308090777653228,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3498278861725103,
+          "basis_orthogonality_frobenius_error": 0.002470933931865724,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.006624445699815e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.4901198312512915,
+          "basis_orthogonality_frobenius_error": 0.0018112065719327847,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4938548544332275,
+          "basis_orthogonality_frobenius_error": 0.0012183741644161033,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.39608852967110547,
+          "basis_orthogonality_frobenius_error": 0.0024392697782476937,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1009831764877975e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6931133124940388,
+          "basis_orthogonality_frobenius_error": 0.002323979857653672,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6403337337711069,
+          "basis_orthogonality_frobenius_error": 0.0012017791597526899,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5570937054080835,
+          "basis_orthogonality_frobenius_error": 0.0023908891262928293,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1946805834260675e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7876278513361757,
+          "basis_orthogonality_frobenius_error": 0.003179649700358864,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7705686198222826,
+          "basis_orthogonality_frobenius_error": 0.0007097903840386494,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6903106700031323,
+          "basis_orthogonality_frobenius_error": 0.0014005098734689385,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.539752589754331e-07
+      }
+    },
+    "19": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.516125407190544,
+          "basis_orthogonality_frobenius_error": 0.0038103152606087294,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4182624465152426,
+          "basis_orthogonality_frobenius_error": 0.0012570828910484022,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3582844376635344,
+          "basis_orthogonality_frobenius_error": 0.0025220408137881524,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 6.898359046026622e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5284731620067226,
+          "basis_orthogonality_frobenius_error": 0.0021811954635206805,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5290853881941844,
+          "basis_orthogonality_frobenius_error": 0.0013205221915906088,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.419997194804647,
+          "basis_orthogonality_frobenius_error": 0.0025105183848007423,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.0580867038718061e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6848034478510081,
+          "basis_orthogonality_frobenius_error": 0.0022537185703945125,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6333879188153088,
+          "basis_orthogonality_frobenius_error": 0.0012577951393367914,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.552860744131872,
+          "basis_orthogonality_frobenius_error": 0.00250702769715048,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2053918189136098e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.812995261468475,
+          "basis_orthogonality_frobenius_error": 0.0022174036272361642,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7977895570785968,
+          "basis_orthogonality_frobenius_error": 0.0007403627382244564,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7178752671886305,
+          "basis_orthogonality_frobenius_error": 0.001413688778145675,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.376356415040109e-07
+      }
+    },
+    "20": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5079210954561352,
+          "basis_orthogonality_frobenius_error": 0.004646805143425834,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.42384811582611254,
+          "basis_orthogonality_frobenius_error": 0.0012142981489424382,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.36154206396279454,
+          "basis_orthogonality_frobenius_error": 0.002420296477897027,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.079173505295248e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5451197803135959,
+          "basis_orthogonality_frobenius_error": 0.0020619442928582876,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5421076847435875,
+          "basis_orthogonality_frobenius_error": 0.0012824554052189522,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4337774057799065,
+          "basis_orthogonality_frobenius_error": 0.002430187943852128,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.14052288022816e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.690615173675156,
+          "basis_orthogonality_frobenius_error": 0.002381408209238443,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6406617584670292,
+          "basis_orthogonality_frobenius_error": 0.0012219587854458331,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5603608203666136,
+          "basis_orthogonality_frobenius_error": 0.0024376805273020716,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1726437494706666e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8390289483714213,
+          "basis_orthogonality_frobenius_error": 0.0012684319267381812,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.826161038949282,
+          "basis_orthogonality_frobenius_error": 0.0006892238478978912,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.744730442074575,
+          "basis_orthogonality_frobenius_error": 0.0014046481703361478,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.908928720905464e-07
+      }
+    },
+    "21": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.4843569043231657,
+          "basis_orthogonality_frobenius_error": 0.004701043355156094,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4124111427002857,
+          "basis_orthogonality_frobenius_error": 0.0012768104377037768,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.35126330329621985,
+          "basis_orthogonality_frobenius_error": 0.0024755426389763773,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.254927266961885e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.55440029025915,
+          "basis_orthogonality_frobenius_error": 0.002158274808163955,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5507074955997031,
+          "basis_orthogonality_frobenius_error": 0.0012699305050683327,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.44457756774166124,
+          "basis_orthogonality_frobenius_error": 0.0024377018280948783,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.099168422787105e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6971484142858426,
+          "basis_orthogonality_frobenius_error": 0.002221933923082515,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6462933092190005,
+          "basis_orthogonality_frobenius_error": 0.0013439820366979776,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5674479275745502,
+          "basis_orthogonality_frobenius_error": 0.002490305171072391,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.177735210138844e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.847253814030011,
+          "basis_orthogonality_frobenius_error": 0.0014557257274015968,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.8359339394602356,
+          "basis_orthogonality_frobenius_error": 0.0007522912261819618,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7553705827042723,
+          "basis_orthogonality_frobenius_error": 0.001420263583304825,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.115711864993319e-07
+      }
+    },
+    "22": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5031728180742637,
+          "basis_orthogonality_frobenius_error": 0.005289400758710292,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4196751676312265,
+          "basis_orthogonality_frobenius_error": 0.001226991343762138,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.36059965084665196,
+          "basis_orthogonality_frobenius_error": 0.0024452865462981253,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.000641339284266e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5380285202002202,
+          "basis_orthogonality_frobenius_error": 0.0023040073811098597,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5392173531573194,
+          "basis_orthogonality_frobenius_error": 0.001312861060364953,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.44127700742992504,
+          "basis_orthogonality_frobenius_error": 0.002448173029321409,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.038239533573853e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6582897434601084,
+          "basis_orthogonality_frobenius_error": 0.003290903879459108,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6030790623581119,
+          "basis_orthogonality_frobenius_error": 0.0012561310383570872,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5265854632513466,
+          "basis_orthogonality_frobenius_error": 0.0023991626614162484,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1984231503168847e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8151659255788032,
+          "basis_orthogonality_frobenius_error": 0.0018792995893044527,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.8061019480894849,
+          "basis_orthogonality_frobenius_error": 0.000729771120952407,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.7217063455502916,
+          "basis_orthogonality_frobenius_error": 0.001432891700966328,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.838307394704323e-07
+      }
+    },
+    "23": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5254948486882969,
+          "basis_orthogonality_frobenius_error": 0.004326479722875742,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4349547353627074,
+          "basis_orthogonality_frobenius_error": 0.0012679663194461737,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3720130330143686,
+          "basis_orthogonality_frobenius_error": 0.0024851024954729538,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.012859582166485e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5736217383604375,
+          "basis_orthogonality_frobenius_error": 0.0018847689026307939,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5652837707351203,
+          "basis_orthogonality_frobenius_error": 0.0012016975185066476,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4546902535704303,
+          "basis_orthogonality_frobenius_error": 0.002421555148244605,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.950916249225338e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6526629491796226,
+          "basis_orthogonality_frobenius_error": 0.0031369260197840637,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5911172062239548,
+          "basis_orthogonality_frobenius_error": 0.0012420816541273225,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5142961914732886,
+          "basis_orthogonality_frobenius_error": 0.0024300582855057507,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2031208378735822e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.8022435737257623,
+          "basis_orthogonality_frobenius_error": 0.0024285545234195385,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7919602662522708,
+          "basis_orthogonality_frobenius_error": 0.0007450173559774289,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.703662419934782,
+          "basis_orthogonality_frobenius_error": 0.0014194766938396654,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.639882157887996e-07
+      }
+    },
+    "24": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5365375880139639,
+          "basis_orthogonality_frobenius_error": 0.00421493573319774,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.44470579003392563,
+          "basis_orthogonality_frobenius_error": 0.0012703652990715003,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3747392042488204,
+          "basis_orthogonality_frobenius_error": 0.002378595551930905,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.13403420261681e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5254443949631478,
+          "basis_orthogonality_frobenius_error": 0.00217471268027315,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.520955881589283,
+          "basis_orthogonality_frobenius_error": 0.0012036446637830897,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4254463000260725,
+          "basis_orthogonality_frobenius_error": 0.0023257175570314424,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.799171175682794e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6398115027185438,
+          "basis_orthogonality_frobenius_error": 0.0027199390539216434,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5877685207568938,
+          "basis_orthogonality_frobenius_error": 0.0012513835768382356,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5101010911673393,
+          "basis_orthogonality_frobenius_error": 0.002395408996095579,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1652659888969346e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7885270040710286,
+          "basis_orthogonality_frobenius_error": 0.002119824835252972,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7730016419939623,
+          "basis_orthogonality_frobenius_error": 0.0007137479937371731,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6842989974070195,
+          "basis_orthogonality_frobenius_error": 0.0014092970052952854,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.660253730353148e-07
+      }
+    },
+    "25": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5294606408729596,
+          "basis_orthogonality_frobenius_error": 0.0036279239724489286,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4417677301038715,
+          "basis_orthogonality_frobenius_error": 0.0012217335650418803,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3748391641812836,
+          "basis_orthogonality_frobenius_error": 0.002457909633367685,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.150675448773165e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6078173061053704,
+          "basis_orthogonality_frobenius_error": 0.0018163899600629465,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6026622722242418,
+          "basis_orthogonality_frobenius_error": 0.00127150781408731,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4917175405140159,
+          "basis_orthogonality_frobenius_error": 0.0023740548368505077,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.770029790957457e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.647179130366155,
+          "basis_orthogonality_frobenius_error": 0.002365635323259859,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5926902434403124,
+          "basis_orthogonality_frobenius_error": 0.001322075968854932,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5141842082413006,
+          "basis_orthogonality_frobenius_error": 0.002509542381765344,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1823069279615617e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.801074842428077,
+          "basis_orthogonality_frobenius_error": 0.002507395576690963,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7841545946182366,
+          "basis_orthogonality_frobenius_error": 0.0007218861273010798,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6968917709754712,
+          "basis_orthogonality_frobenius_error": 0.0014289957568535936,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.940628045221542e-07
+      }
+    },
+    "26": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5735078407366561,
+          "basis_orthogonality_frobenius_error": 0.0038319884760618594,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.47469216044214835,
+          "basis_orthogonality_frobenius_error": 0.0012206090438613602,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4044195339461206,
+          "basis_orthogonality_frobenius_error": 0.002414628214687702,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.146579917100942e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5761635076921812,
+          "basis_orthogonality_frobenius_error": 0.002676062829217554,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5750608522808194,
+          "basis_orthogonality_frobenius_error": 0.0012917712374956346,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.46185265708312007,
+          "basis_orthogonality_frobenius_error": 0.002494001089216749,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.0164675270673787e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6446349271578905,
+          "basis_orthogonality_frobenius_error": 0.002538307904987111,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5873001888665771,
+          "basis_orthogonality_frobenius_error": 0.0012692906798881167,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5098667681555344,
+          "basis_orthogonality_frobenius_error": 0.0023889185251181467,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1939052818028785e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7886234642332054,
+          "basis_orthogonality_frobenius_error": 0.0027262513915055227,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7703886795937875,
+          "basis_orthogonality_frobenius_error": 0.0007395588323245789,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6812498781446052,
+          "basis_orthogonality_frobenius_error": 0.0014035744645547565,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.8115891374262e-07
+      }
+    },
+    "27": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5512271942404422,
+          "basis_orthogonality_frobenius_error": 0.0038929878198917215,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.46620390675207335,
+          "basis_orthogonality_frobenius_error": 0.001224202475732886,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3955431775152875,
+          "basis_orthogonality_frobenius_error": 0.0024351229301808057,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.077025164398398e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5559577026388945,
+          "basis_orthogonality_frobenius_error": 0.0021194120078768157,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5522124369593644,
+          "basis_orthogonality_frobenius_error": 0.0012064743947990944,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.44444888216885986,
+          "basis_orthogonality_frobenius_error": 0.002467724239768816,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.777340393100648e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6424908251735997,
+          "basis_orthogonality_frobenius_error": 0.0025247958763873557,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5844164829050157,
+          "basis_orthogonality_frobenius_error": 0.0011791233195767297,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5069644369961904,
+          "basis_orthogonality_frobenius_error": 0.0024161268035928717,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1778540644561863e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7939027818508129,
+          "basis_orthogonality_frobenius_error": 0.00260352305815224,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7780375955859304,
+          "basis_orthogonality_frobenius_error": 0.0007090370782313098,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6876263543436183,
+          "basis_orthogonality_frobenius_error": 0.0014097883205540069,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.090174545423683e-07
+      }
+    },
+    "28": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5325909374487343,
+          "basis_orthogonality_frobenius_error": 0.004203091621002946,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.43674835834616926,
+          "basis_orthogonality_frobenius_error": 0.0011996511417969244,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.36640473377122923,
+          "basis_orthogonality_frobenius_error": 0.0024113291454016706,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.407514828286522e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6135334246798312,
+          "basis_orthogonality_frobenius_error": 0.0020087585779080923,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6054337603866189,
+          "basis_orthogonality_frobenius_error": 0.001220517652998849,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5017225873354355,
+          "basis_orthogonality_frobenius_error": 0.0024503931561106955,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.0072393606230145e-06
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6450813175925569,
+          "basis_orthogonality_frobenius_error": 0.002583617759235331,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5873105088272276,
+          "basis_orthogonality_frobenius_error": 0.001269009388058375,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5099989659810048,
+          "basis_orthogonality_frobenius_error": 0.00242588785046303,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2083016481083893e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7726155312887174,
+          "basis_orthogonality_frobenius_error": 0.0027094112472203797,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7551282482246984,
+          "basis_orthogonality_frobenius_error": 0.0007388224666993463,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6682938747653381,
+          "basis_orthogonality_frobenius_error": 0.0013886156736135906,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.708667059120627e-07
+      }
+    },
+    "29": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5913853335251956,
+          "basis_orthogonality_frobenius_error": 0.0036937088756805085,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5021682333552883,
+          "basis_orthogonality_frobenius_error": 0.0011936001960260241,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.41793011274957664,
+          "basis_orthogonality_frobenius_error": 0.002366151916162103,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.289297303804617e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5058119854469988,
+          "basis_orthogonality_frobenius_error": 0.0022351691871021263,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4970773621578928,
+          "basis_orthogonality_frobenius_error": 0.0012167097725860605,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3946573503884067,
+          "basis_orthogonality_frobenius_error": 0.002428952427727875,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.307620035127695e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6456748002083941,
+          "basis_orthogonality_frobenius_error": 0.0024675262107173245,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.586031150252231,
+          "basis_orthogonality_frobenius_error": 0.0012630173671405876,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5091929844431897,
+          "basis_orthogonality_frobenius_error": 0.002449146593927628,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1730830703137423e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7338279823340736,
+          "basis_orthogonality_frobenius_error": 0.0033564026836272686,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7094875953463984,
+          "basis_orthogonality_frobenius_error": 0.0007709291517337496,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6193053827269123,
+          "basis_orthogonality_frobenius_error": 0.0014469093512246612,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.242929963317083e-07
+      }
+    },
+    "30": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5602219772535644,
+          "basis_orthogonality_frobenius_error": 0.0032017437683084377,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.45753028021634495,
+          "basis_orthogonality_frobenius_error": 0.0011887386722601514,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3887580867783515,
+          "basis_orthogonality_frobenius_error": 0.0024006794928071637,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.017857854418525e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5692896752446654,
+          "basis_orthogonality_frobenius_error": 0.002174823785311567,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5469593209588025,
+          "basis_orthogonality_frobenius_error": 0.0012100568368113998,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.44696183704309417,
+          "basis_orthogonality_frobenius_error": 0.0024365078934626217,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.709683531962221e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6352848536953396,
+          "basis_orthogonality_frobenius_error": 0.002327948778820333,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5819496458215565,
+          "basis_orthogonality_frobenius_error": 0.0012106487848833126,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5039731967813974,
+          "basis_orthogonality_frobenius_error": 0.002391926816357632,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1858687183226526e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.7313469815027434,
+          "basis_orthogonality_frobenius_error": 0.00275079792225615,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7012661791943888,
+          "basis_orthogonality_frobenius_error": 0.0007739642653050982,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.6106790687925081,
+          "basis_orthogonality_frobenius_error": 0.001415801251607793,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.119757784651173e-07
+      }
+    },
+    "31": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.555229329951277,
+          "basis_orthogonality_frobenius_error": 0.0037397596203858924,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4676890203455782,
+          "basis_orthogonality_frobenius_error": 0.0012538743461094593,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.39018849706444225,
+          "basis_orthogonality_frobenius_error": 0.0024384578191743306,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.19878444136316e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.562123402409716,
+          "basis_orthogonality_frobenius_error": 0.0021224115051229077,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5495350581923678,
+          "basis_orthogonality_frobenius_error": 0.0012356717109352363,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.44704191712973146,
+          "basis_orthogonality_frobenius_error": 0.002428570176924603,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.97493058109549e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6339911179957551,
+          "basis_orthogonality_frobenius_error": 0.002314644068069417,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5891682648324934,
+          "basis_orthogonality_frobenius_error": 0.0012860754651811827,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5084999672453111,
+          "basis_orthogonality_frobenius_error": 0.0024324989744603973,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1972395251508244e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.70700631987606,
+          "basis_orthogonality_frobenius_error": 0.0037052108300873496,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6840154445956936,
+          "basis_orthogonality_frobenius_error": 0.0007295022596503508,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5946271114370133,
+          "basis_orthogonality_frobenius_error": 0.0014144586202367235,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.588090706241395e-07
+      }
+    },
+    "32": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5426379023650328,
+          "basis_orthogonality_frobenius_error": 0.0038784794733658615,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4503509116847341,
+          "basis_orthogonality_frobenius_error": 0.0012322233026059648,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3766991063163119,
+          "basis_orthogonality_frobenius_error": 0.0024627586435426855,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.530478255773709e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5621309007289393,
+          "basis_orthogonality_frobenius_error": 0.0021119249897797727,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5430284566111403,
+          "basis_orthogonality_frobenius_error": 0.0012903181093178147,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4377604020632531,
+          "basis_orthogonality_frobenius_error": 0.002453488909034006,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.391406034871695e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6301087510255506,
+          "basis_orthogonality_frobenius_error": 0.002482000683447777,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5865519296261729,
+          "basis_orthogonality_frobenius_error": 0.001303036280363168,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5066067756699927,
+          "basis_orthogonality_frobenius_error": 0.00249730738004388,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.217919305268768e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.730722198778087,
+          "basis_orthogonality_frobenius_error": 0.0029440128363240736,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.7106060642300882,
+          "basis_orthogonality_frobenius_error": 0.0007649967420371282,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.616159666707531,
+          "basis_orthogonality_frobenius_error": 0.0014384140637395519,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.585106039949858e-07
+      }
+    },
+    "33": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.563498918951886,
+          "basis_orthogonality_frobenius_error": 0.0043017842463757726,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4727386278717145,
+          "basis_orthogonality_frobenius_error": 0.001238537518530706,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.38275087745175695,
+          "basis_orthogonality_frobenius_error": 0.002387227469173186,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.421141047638474e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.4326202408303415,
+          "basis_orthogonality_frobenius_error": 0.002085611397494537,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.42230645721506227,
+          "basis_orthogonality_frobenius_error": 0.0013387989562501958,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3231387566621331,
+          "basis_orthogonality_frobenius_error": 0.0024682321908316937,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 9.03505930197986e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6113530804189798,
+          "basis_orthogonality_frobenius_error": 0.002625792540201722,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.5648845610853226,
+          "basis_orthogonality_frobenius_error": 0.0012354757698822916,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.48692442946656794,
+          "basis_orthogonality_frobenius_error": 0.0024501701158177523,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2209992879873227e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.6891246041776325,
+          "basis_orthogonality_frobenius_error": 0.0023280236873619267,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.6693784650697902,
+          "basis_orthogonality_frobenius_error": 0.0007340840434350059,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.5789934917701696,
+          "basis_orthogonality_frobenius_error": 0.0013757517860684848,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.7474134160905e-07
+      }
+    },
+    "34": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5211187573381271,
+          "basis_orthogonality_frobenius_error": 0.0037363777272868943,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.4207296294621871,
+          "basis_orthogonality_frobenius_error": 0.0012965177839232307,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.3522248558239567,
+          "basis_orthogonality_frobenius_error": 0.0024564498631008073,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.226608288719515e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.41314881955687127,
+          "basis_orthogonality_frobenius_error": 0.002221301735255417,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.37805811619443797,
+          "basis_orthogonality_frobenius_error": 0.0012787227307055257,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.29560265849732387,
+          "basis_orthogonality_frobenius_error": 0.0024560288547614537,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 8.259779471675844e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5266231795841495,
+          "basis_orthogonality_frobenius_error": 0.0038675365620452215,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.46881655662414007,
+          "basis_orthogonality_frobenius_error": 0.0011626513198413322,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.4004147361684917,
+          "basis_orthogonality_frobenius_error": 0.0024178925851389673,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.2417222985520701e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.5163670784465896,
+          "basis_orthogonality_frobenius_error": 0.0027527077542031757,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.42668347048220046,
+          "basis_orthogonality_frobenius_error": 0.0007192700967925986,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.36613670305786306,
+          "basis_orthogonality_frobenius_error": 0.0014235590124084569,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 4.489751001123317e-07
+      }
+    },
+    "35": {
+      "attn_qkv": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.4662009822960688,
+          "basis_orthogonality_frobenius_error": 0.004579083795212776,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.383005751499771,
+          "basis_orthogonality_frobenius_error": 0.0012324696309233712,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.32452089228443703,
+          "basis_orthogonality_frobenius_error": 0.002430367130729463,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.065022235685303e-07
+      },
+      "attn_o": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.41376313832051875,
+          "basis_orthogonality_frobenius_error": 0.0018446293938255782,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.392632587239965,
+          "basis_orthogonality_frobenius_error": 0.001321189959378646,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.31913088725979344,
+          "basis_orthogonality_frobenius_error": 0.0025062112060476958,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 7.395967192038056e-07
+      },
+      "ffn_gate_up": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.32513037973616404,
+          "basis_orthogonality_frobenius_error": 0.004522286829810377,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.27285452491820655,
+          "basis_orthogonality_frobenius_error": 0.001360309383616776,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.2304404552230887,
+          "basis_orthogonality_frobenius_error": 0.0024606780509589653,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.3417871734779658e-06
+      },
+      "ffn_down": {
+        "q2_r32": {
+          "relative_weighted_calibration_residual": 0.10709767358324886,
+          "basis_orthogonality_frobenius_error": 0.004511933354994135,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r32": {
+          "relative_weighted_calibration_residual": 0.06003953206372766,
+          "basis_orthogonality_frobenius_error": 0.0006944540150289624,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "lut2_r64": {
+          "relative_weighted_calibration_residual": 0.04799363119484366,
+          "basis_orthogonality_frobenius_error": 0.0013812327685829879,
+          "storage_dtype": "bfloat16",
+          "compute_dtype": "float32"
+        },
+        "parseval_relative_l2": 1.1249401912140217e-06
+      }
+    }
+  },
+  "max_parseval_relative_l2": 1.4388853755355003e-06,
+  "quality": {
+    "methods": {
+      "bf16": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "top1_agreement_vs_bf16": 1.0,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 16381470720,
+            "GB": 16.38147072,
+            "GiB": 15.256433486938477
+          },
+          "replaced_252_linears": {
+            "bytes": 13891534848,
+            "GB": 13.891534848,
+            "GiB": 12.9375,
+            "effective_bpw": 16.0
+          }
+        }
+      },
+      "q4_g64": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 0.5156282502508589,
+          "median": 0.2230420379426157,
+          "p95": 0.6085098481727291,
+          "max": 14.902312477709646
+        },
+        "top1_agreement_vs_bf16": 0.71,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 6396930048,
+            "GB": 6.396930048,
+            "GiB": 5.957605361938477
+          },
+          "replaced_252_linears": {
+            "bytes": 3906994176,
+            "GB": 3.906994176,
+            "GiB": 3.638671875,
+            "effective_bpw": 4.5
+          }
+        }
+      },
+      "q3_g64": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 0.6524008073642794,
+          "median": 0.47646392233764084,
+          "p95": 1.356881505624389,
+          "max": 6.417431127924822
+        },
+        "top1_agreement_vs_bf16": 0.565,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 5528709120,
+            "GB": 5.52870912,
+            "GiB": 5.149011611938477
+          },
+          "replaced_252_linears": {
+            "bytes": 3038773248,
+            "GB": 3.038773248,
+            "GiB": 2.830078125,
+            "effective_bpw": 3.5
+          }
+        }
+      },
+      "q2_g64": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 5.109973108750849,
+          "median": 4.531416353361193,
+          "p95": 9.091227077697974,
+          "max": 13.917666829031843
+        },
+        "top1_agreement_vs_bf16": 0.06,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 4660488192,
+            "GB": 4.660488192,
+            "GiB": 4.340417861938477
+          },
+          "replaced_252_linears": {
+            "bytes": 2170552320,
+            "GB": 2.17055232,
+            "GiB": 2.021484375,
+            "effective_bpw": 2.5
+          }
+        }
+      },
+      "q2_g64_qera_r32": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 0.6830840689816648,
+          "median": 0.5788868082357519,
+          "p95": 1.6582610553915162,
+          "max": 3.3862459200946358
+        },
+        "top1_agreement_vs_bf16": 0.63,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 4806764544,
+            "GB": 4.806764544,
+            "GiB": 4.476648330688477
+          },
+          "replaced_252_linears": {
+            "bytes": 2316828672,
+            "GB": 2.316828672,
+            "GiB": 2.15771484375,
+            "effective_bpw": 2.6684782608695654
+          }
+        }
+      },
+      "lut2_rht": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 4.206791761928958,
+          "median": 3.9420497777818477,
+          "p95": 7.919930958703259,
+          "max": 12.440266833289849
+        },
+        "top1_agreement_vs_bf16": 0.19,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 4230128640,
+            "GB": 4.23012864,
+            "GiB": 3.9396142959594727
+          },
+          "replaced_252_linears": {
+            "bytes": 1740192768,
+            "GB": 1.740192768,
+            "GiB": 1.620680809020996,
+            "effective_bpw": 2.004320227581522
+          }
+        }
+      },
+      "lut2_rht_qera_r32": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 0.9821862068804004,
+          "median": 0.8062152960234169,
+          "p95": 2.308050266608783,
+          "max": 5.317247473485297
+        },
+        "top1_agreement_vs_bf16": 0.52,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 4376404992,
+            "GB": 4.376404992,
+            "GiB": 4.075844764709473
+          },
+          "replaced_252_linears": {
+            "bytes": 1886469120,
+            "GB": 1.88646912,
+            "GiB": 1.756911277770996,
+            "effective_bpw": 2.172798488451087
+          }
+        }
+      },
+      "lut2_rht_qera_r64": {
+        "kl_nats": {
+          "count": 200,
+          "mean": 0.8057637578320859,
+          "median": 0.6696947191007179,
+          "p95": 1.934697888216831,
+          "max": 3.3347738814641104
+        },
+        "top1_agreement_vs_bf16": 0.57,
+        "top1_tokens": 200,
+        "size": {
+          "total_model": {
+            "bytes": 4522681344,
+            "GB": 4.522681344,
+            "GiB": 4.212075233459473
+          },
+          "replaced_252_linears": {
+            "bytes": 2032745472,
+            "GB": 2.032745472,
+            "GiB": 1.893141746520996,
+            "effective_bpw": 2.3412767493206523
+          }
+        }
+      }
+    }
+  },
+  "ffn_benchmark": {
+    "scope": "six different real layer 0..5 weights per mode",
+    "eviction_bytes_before_every_timed_sweep": 268435456,
+    "slc_note": "A 256 MiB GPU read precedes every sweep; physical SLC eviction is not counter-verified",
+    "differential": {
+      "reference": "FP32 accumulation of FP16 per-block LUT dots from decoded codes; FP16 RHT activation",
+      "limit": 0.005,
+      "records": [
+        {
+          "projection": "gate_proj",
+          "batch": 1,
+          "kernel": "lut2_c256_t256_r1_b1_s1",
+          "max_abs_diff": 1.1920928955078125e-07,
+          "differential_pass": true
+        },
+        {
+          "projection": "gate_proj",
+          "batch": 4,
+          "kernel": "lut2_c256_t256_r2_b1_s1",
+          "max_abs_diff": 4.76837158203125e-07,
+          "differential_pass": true
+        },
+        {
+          "projection": "gate_proj",
+          "batch": 8,
+          "kernel": "lut2_c256_t256_r2_b1_s1",
+          "max_abs_diff": 4.76837158203125e-07,
+          "differential_pass": true
+        },
+        {
+          "projection": "up_proj",
+          "batch": 1,
+          "kernel": "lut2_c256_t256_r1_b1_s1",
+          "max_abs_diff": 1.1920928955078125e-07,
+          "differential_pass": true
+        },
+        {
+          "projection": "up_proj",
+          "batch": 4,
+          "kernel": "lut2_c256_t256_r2_b1_s1",
+          "max_abs_diff": 2.384185791015625e-07,
+          "differential_pass": true
+        },
+        {
+          "projection": "up_proj",
+          "batch": 8,
+          "kernel": "lut2_c256_t256_r2_b1_s1",
+          "max_abs_diff": 3.5762786865234375e-07,
+          "differential_pass": true
+        },
+        {
+          "projection": "down_proj",
+          "batch": 1,
+          "kernel": "lut2_c256_t256_r1_b1_s1",
+          "max_abs_diff": 1.1920928955078125e-07,
+          "differential_pass": true
+        },
+        {
+          "projection": "down_proj",
+          "batch": 4,
+          "kernel": "lut2_c256_t256_r2_b1_s1",
+          "max_abs_diff": 1.9073486328125e-06,
+          "differential_pass": true
+        },
+        {
+          "projection": "down_proj",
+          "batch": 8,
+          "kernel": "lut2_c256_t256_r2_b1_s1",
+          "max_abs_diff": 1.9073486328125e-06,
+          "differential_pass": true
+        }
+      ],
+      "all_pass": true
+    },
+    "ffn": {
+      "scope": "gate + up + SiLU + down",
+      "batches": {
+        "1": {
+          "q4_g64": {
+            "ms_per_block": 0.15825683333333335,
+            "samples_ms_per_block": [
+              0.15838183333333333,
+              0.16219433333333333,
+              0.15695833333333334,
+              0.1573055,
+              0.15759716666666668,
+              0.15825683333333335,
+              0.15863883333333334,
+              0.15560416666666665,
+              0.17803466666666667
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 84934656,
+            "working_set_bytes": 509607936,
+            "effective_weight_gb_s": 536.6887117038654,
+            "dense_equivalent_tflop_s": 1.9082265305026322,
+            "speedup_over_q4": 1.0
+          },
+          "q2_g64": {
+            "ms_per_block": 0.110125,
+            "samples_ms_per_block": [
+              0.11108333333333334,
+              0.110125,
+              0.1161875,
+              0.1090625,
+              0.110125,
+              0.10841666666666666,
+              0.12110416666666667,
+              0.10964583333333333,
+              0.1104305
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 47185920,
+            "working_set_bytes": 283115520,
+            "effective_weight_gb_s": 428.4760045402951,
+            "dense_equivalent_tflop_s": 2.742246429057889,
+            "speedup_over_q4": 1.4370654559213016
+          },
+          "lut2_rht": {
+            "ms_per_block": 0.122882,
+            "samples_ms_per_block": [
+              0.12970133333333334,
+              0.121639,
+              0.12432633333333333,
+              0.12258333333333334,
+              0.123243,
+              0.12361116666666666,
+              0.122882,
+              0.12170833333333334,
+              0.12234716666666667
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 37823232,
+            "working_set_bytes": 226939392,
+            "effective_weight_gb_s": 307.80124021418925,
+            "dense_equivalent_tflop_s": 2.457560000651031,
+            "speedup_over_q4": 1.287876445153345
+          },
+          "lut2_rht_qera_r32": {
+            "ms_per_block": 0.232257,
+            "samples_ms_per_block": [
+              0.244625,
+              0.23355566666666666,
+              0.232257,
+              0.23240283333333334,
+              0.233236,
+              0.22965283333333333,
+              0.22885416666666666,
+              0.23151383333333334,
+              0.23204866666666665
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 40706816,
+            "working_set_bytes": 244240896,
+            "effective_weight_gb_s": 175.2662610814744,
+            "dense_equivalent_tflop_s": 1.3002401994342474,
+            "speedup_over_q4": 0.6813867109853884
+          }
+        },
+        "4": {
+          "q4_g64": {
+            "ms_per_block": 0.20595133333333332,
+            "samples_ms_per_block": [
+              0.21054866666666666,
+              0.22465966666666667,
+              0.21217366666666668,
+              0.20034033333333334,
+              0.20595133333333332,
+              0.20452083333333335,
+              0.19301383333333333,
+              0.1997015,
+              0.21235416666666668
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 84934656,
+            "working_set_bytes": 509607936,
+            "effective_weight_gb_s": 412.4015835456273,
+            "dense_equivalent_tflop_s": 5.865266965982255,
+            "speedup_over_q4": 1.0
+          },
+          "q2_g64": {
+            "ms_per_block": 0.19784016666666668,
+            "samples_ms_per_block": [
+              0.1960555,
+              0.19201383333333333,
+              0.21192366666666668,
+              0.19251383333333333,
+              0.19122916666666667,
+              0.5833401666666667,
+              0.19784016666666668,
+              0.207861,
+              0.20513183333333335
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 47185920,
+            "working_set_bytes": 283115520,
+            "effective_weight_gb_s": 238.50525803236786,
+            "dense_equivalent_tflop_s": 6.1057346056286175,
+            "speedup_over_q4": 1.0409985838736824
+          },
+          "lut2_rht": {
+            "ms_per_block": 0.1929445,
+            "samples_ms_per_block": [
+              0.18759033333333333,
+              0.19338183333333334,
+              0.194618,
+              0.18738883333333334,
+              0.192014,
+              0.19359033333333334,
+              0.18909716666666668,
+              0.1929445,
+              0.48788183333333335
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 37823232,
+            "working_set_bytes": 226939392,
+            "effective_weight_gb_s": 196.03166713744108,
+            "dense_equivalent_tflop_s": 6.260658127077994,
+            "speedup_over_q4": 1.067412304229109
+          },
+          "lut2_rht_qera_r32": {
+            "ms_per_block": 0.2635903333333333,
+            "samples_ms_per_block": [
+              0.26223616666666666,
+              0.26282633333333333,
+              0.5805765,
+              0.2629166666666667,
+              0.26889583333333333,
+              0.2721805,
+              0.2635903333333333,
+              0.260375,
+              0.29652083333333334
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 40706816,
+            "working_set_bytes": 244240896,
+            "effective_weight_gb_s": 154.43212763239927,
+            "dense_equivalent_tflop_s": 4.582715673690614,
+            "speedup_over_q4": 0.7813311312630332
+          }
+        },
+        "8": {
+          "q4_g64": {
+            "ms_per_block": 0.33894433333333335,
+            "samples_ms_per_block": [
+              0.33522216666666665,
+              0.33894433333333335,
+              0.33108333333333334,
+              0.34156933333333334,
+              0.4138401666666667,
+              0.3544791666666667,
+              0.33731933333333336,
+              0.33659716666666667,
+              0.36152083333333335
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 84934656,
+            "working_set_bytes": 509607936,
+            "effective_weight_gb_s": 250.5858562812182,
+            "dense_equivalent_tflop_s": 7.127775467554652,
+            "speedup_over_q4": 1.0
+          },
+          "q2_g64": {
+            "ms_per_block": 0.338,
+            "samples_ms_per_block": [
+              0.33841666666666664,
+              0.334986,
+              0.33609716666666667,
+              0.7234721666666667,
+              0.3337638333333333,
+              0.3335901666666667,
+              0.338,
+              0.35152083333333334,
+              0.42236816666666666
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 47185920,
+            "working_set_bytes": 283115520,
+            "effective_weight_gb_s": 139.60331360946745,
+            "dense_equivalent_tflop_s": 7.147689656804734,
+            "speedup_over_q4": 1.002793885601578
+          },
+          "lut2_rht": {
+            "ms_per_block": 0.308875,
+            "samples_ms_per_block": [
+              0.3061735,
+              0.3086945,
+              0.3444583333333333,
+              0.3090486666666667,
+              0.2989305,
+              0.3110625,
+              0.308875,
+              0.299368,
+              0.35920833333333335
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 37823232,
+            "working_set_bytes": 226939392,
+            "effective_weight_gb_s": 122.4548182921894,
+            "dense_equivalent_tflop_s": 7.821672534196681,
+            "speedup_over_q4": 1.0973511398893836
+          },
+          "lut2_rht_qera_r32": {
+            "ms_per_block": 0.384361,
+            "samples_ms_per_block": [
+              0.3778471666666667,
+              0.5080973333333333,
+              0.39675,
+              0.3729166666666667,
+              0.3770556666666667,
+              0.384361,
+              0.409882,
+              0.39321516666666667,
+              0.3800208333333333
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 40706816,
+            "working_set_bytes": 244240896,
+            "effective_weight_gb_s": 105.90776899841555,
+            "dense_equivalent_tflop_s": 6.2855469311402565,
+            "speedup_over_q4": 0.881838514660263
+          }
+        }
+      }
+    },
+    "attention_projections": {
+      "scope": "q + k + v + o; custom q/k/v share one RHT and one rank projection; excludes SDPA",
+      "batches": {
+        "1": {
+          "q4_g64": {
+            "ms_per_block": 0.07572216666666666,
+            "samples_ms_per_block": [
+              0.07536116666666667,
+              0.07661116666666666,
+              0.075389,
+              0.07682633333333333,
+              0.07591666666666666,
+              0.08078483333333333,
+              0.07546533333333333,
+              0.07572216666666666,
+              0.07538183333333333
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 23592960,
+            "working_set_bytes": 141557760,
+            "effective_weight_gb_s": 311.57270108048505,
+            "dense_equivalent_tflop_s": 1.1078140482861691,
+            "speedup_over_q4": 1.0
+          },
+          "q2_g64": {
+            "ms_per_block": 0.0608265,
+            "samples_ms_per_block": [
+              0.060632,
+              0.06104866666666667,
+              0.060007,
+              0.0608265,
+              0.0795,
+              0.06690983333333334,
+              0.06054166666666667,
+              0.06288183333333333,
+              0.060631833333333336
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 13107200,
+            "working_set_bytes": 78643200,
+            "effective_weight_gb_s": 215.48502708523424,
+            "dense_equivalent_tflop_s": 1.3791041733454992,
+            "speedup_over_q4": 1.2448877819152286
+          },
+          "lut2_rht": {
+            "ms_per_block": 0.07699316666666667,
+            "samples_ms_per_block": [
+              0.07699316666666667,
+              0.09009016666666667,
+              0.4994861666666667,
+              0.07724316666666667,
+              0.07584033333333333,
+              0.07550683333333333,
+              0.075486,
+              0.07626383333333334,
+              0.08195133333333333
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 10515456,
+            "working_set_bytes": 63092736,
+            "effective_weight_gb_s": 136.57648406027374,
+            "dense_equivalent_tflop_s": 1.089526299953026,
+            "speedup_over_q4": 0.9834920415015185
+          },
+          "lut2_rht_qera_r32": {
+            "ms_per_block": 0.23040983333333334,
+            "samples_ms_per_block": [
+              0.23329166666666667,
+              0.22415283333333333,
+              0.230014,
+              0.23540266666666668,
+              0.23038183333333334,
+              0.23040983333333334,
+              0.25583333333333336,
+              0.23847916666666666,
+              0.226993
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 11695104,
+            "working_set_bytes": 70170624,
+            "effective_weight_gb_s": 50.757833686206965,
+            "dense_equivalent_tflop_s": 0.3640733504574096,
+            "speedup_over_q4": 0.3286412110594238
+          }
+        },
+        "4": {
+          "q4_g64": {
+            "ms_per_block": 0.08839583333333334,
+            "samples_ms_per_block": [
+              0.09983333333333333,
+              0.086375,
+              0.0884375,
+              0.08959016666666667,
+              0.08839583333333334,
+              0.08734716666666667,
+              0.0865555,
+              0.08555566666666667,
+              0.4766805
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 23592960,
+            "working_set_bytes": 141557760,
+            "effective_weight_gb_s": 266.9012679707754,
+            "dense_equivalent_tflop_s": 3.7959291444732495,
+            "speedup_over_q4": 1.0
+          },
+          "q2_g64": {
+            "ms_per_block": 0.08702783333333333,
+            "samples_ms_per_block": [
+              0.08702783333333333,
+              0.08597216666666667,
+              0.09625683333333333,
+              0.0813125,
+              0.08359016666666666,
+              0.08863883333333333,
+              0.08764583333333334,
+              0.08346516666666666,
+              0.45408333333333334
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 13107200,
+            "working_set_bytes": 78643200,
+            "effective_weight_gb_s": 150.60928783320279,
+            "dense_equivalent_tflop_s": 3.8555977685299916,
+            "speedup_over_q4": 1.0157191090206774
+          },
+          "lut2_rht": {
+            "ms_per_block": 0.10698616666666666,
+            "samples_ms_per_block": [
+              0.10816666666666666,
+              0.09995833333333333,
+              0.10698616666666666,
+              0.09860416666666667,
+              0.10779866666666667,
+              0.10360416666666666,
+              0.106743,
+              0.11165283333333334,
+              0.4689235
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 10515456,
+            "working_set_bytes": 63092736,
+            "effective_weight_gb_s": 98.28799673478036,
+            "dense_equivalent_tflop_s": 3.1363337004628327,
+            "speedup_over_q4": 0.8262361021752035
+          },
+          "lut2_rht_qera_r32": {
+            "ms_per_block": 0.18734033333333333,
+            "samples_ms_per_block": [
+              0.18772916666666667,
+              0.18734033333333333,
+              0.188507,
+              0.6242568333333334,
+              0.19602766666666666,
+              0.18588883333333334,
+              0.18496533333333334,
+              0.1856805,
+              0.17853466666666667
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 11695104,
+            "working_set_bytes": 70170624,
+            "effective_weight_gb_s": 62.42704809962617,
+            "dense_equivalent_tflop_s": 1.7910949234992997,
+            "speedup_over_q4": 0.4718462477380739
+          }
+        },
+        "8": {
+          "q4_g64": {
+            "ms_per_block": 0.13847216666666667,
+            "samples_ms_per_block": [
+              0.14470133333333332,
+              0.12648616666666668,
+              0.48039583333333336,
+              0.13847216666666667,
+              0.12729866666666667,
+              0.12740966666666667,
+              0.13854866666666665,
+              0.1395625,
+              0.12863883333333334
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 23592960,
+            "working_set_bytes": 141557760,
+            "effective_weight_gb_s": 170.38052171736075,
+            "dense_equivalent_tflop_s": 4.846379284404928,
+            "speedup_over_q4": 1.0
+          },
+          "q2_g64": {
+            "ms_per_block": 0.13372216666666667,
+            "samples_ms_per_block": [
+              0.141264,
+              0.1275555,
+              0.12684016666666667,
+              0.13810416666666667,
+              0.13372216666666667,
+              0.13234733333333334,
+              0.1374235,
+              0.13064583333333332,
+              0.1436805
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 13107200,
+            "working_set_bytes": 78643200,
+            "effective_weight_gb_s": 98.01815455677381,
+            "dense_equivalent_tflop_s": 5.018529513306818,
+            "speedup_over_q4": 1.0355214106860868
+          },
+          "lut2_rht": {
+            "ms_per_block": 0.14028466666666667,
+            "samples_ms_per_block": [
+              0.13966666666666666,
+              0.14100683333333333,
+              0.14028466666666667,
+              0.14057633333333333,
+              0.13209033333333334,
+              0.1373055,
+              0.14357633333333333,
+              0.13156933333333334,
+              0.48624316666666667
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 10515456,
+            "working_set_bytes": 63092736,
+            "effective_weight_gb_s": 74.95798542962643,
+            "dense_equivalent_tflop_s": 4.783763300336934,
+            "speedup_over_q4": 0.9870798424156596
+          },
+          "lut2_rht_qera_r32": {
+            "ms_per_block": 0.22561816666666668,
+            "samples_ms_per_block": [
+              0.2698333333333333,
+              0.22497916666666667,
+              0.217861,
+              0.22227083333333333,
+              0.2288195,
+              0.22561816666666668,
+              0.2324235,
+              0.25121533333333335,
+              0.22421533333333332
+            ],
+            "copies": 6,
+            "weight_bytes_per_copy": 11695104,
+            "working_set_bytes": 70170624,
+            "effective_weight_gb_s": 51.835825868041056,
+            "dense_equivalent_tflop_s": 2.974444167838139,
+            "speedup_over_q4": 0.6137456425273083
+          }
+        }
+      }
+    },
+    "hero_shared_gate_up": {
+      "one_rht_for_gate_and_up": true,
+      "one_u_for_gate_and_up": true,
+      "coefficient_matrices_bytes": 1572864,
+      "coefficient_matrices_below_64_mib": true
+    }
+  },
+  "live_decode": {
+    "prompt": "The old observatory stood above the harbour. On the first clear night of spring, the caretaker opened the dome and discovered",
+    "prompt_tokens": 25,
+    "generated_tokens_per_mode": 128,
+    "decode_definition": "steady single-token greedy sweeps after prefill; EOS does not shorten the fixed run",
+    "lm_head": {
+      "bf16": "BF16",
+      "q4_g64": "stock MLX Q4-g64",
+      "q2_g64": "stock MLX Q2-g64",
+      "lut2_rht_qera_r32": "BF16; only the requested 252 linears are replaced"
+    },
+    "modes": {
+      "bf16": {
+        "generated_tokens": 128,
+        "timed_decode_sweeps": 127,
+        "decode_seconds": 3.177704417,
+        "tok_s": 39.96595760152477,
+        "tokens": [
+          264,
+          55825,
+          429,
+          1030,
+          1012,
+          22329,
+          13,
+          1260,
+          2598,
+          279,
+          4282,
+          11,
+          879,
+          11465,
+          304,
+          264,
+          2421,
+          4420,
+          13,
+          576,
+          4282,
+          9452,
+          6966,
+          518,
+          279,
+          55825,
+          323,
+          1053,
+          11,
+          330,
+          40,
+          646,
+          944,
+          4411,
+          432,
+          0,
+          1084,
+          594,
+          264,
+          12418,
+          8958,
+          576,
+          52301,
+          4407,
+          572,
+          26620,
+          13,
+          330,
+          3983,
+          432,
+          594,
+          279,
+          1931,
+          55825,
+          8958,
+          566,
+          1053,
+          13,
+          330,
+          2132,
+          594,
+          279,
+          825,
+          429,
+          572,
+          22329,
+          8958,
+          576,
+          4282,
+          9452,
+          30545,
+          13,
+          330,
+          2753,
+          11,
+          432,
+          594,
+          537,
+          1335,
+          566,
+          1053,
+          13,
+          330,
+          2132,
+          594,
+          264,
+          2975,
+          13,
+          576,
+          1931,
+          55825,
+          572,
+          22329,
+          1537,
+          1042,
+          1189,
+          576,
+          52301,
+          4407,
+          572,
+          21815,
+          13,
+          330,
+          3983,
+          1246,
+          653,
+          498,
+          1414,
+          7521,
+          566,
+          4588,
+          13,
+          576,
+          4282,
+          9452,
+          11247,
+          11,
+          330,
+          1654,
+          1730,
+          279,
+          1931,
+          55825,
+          304,
+          279,
+          74642,
+          13,
+          1084
+        ],
+        "text": " a telescope that had been stolen. He called the police, who arrived in a few minutes. The police officer looked at the telescope and said, \"I can't believe it! It's a fake!\" The caretaker was shocked. \"But it's the real telescope!\" he said. \"It's the one that was stolen!\" The police officer smiled. \"No, it's not,\" he said. \"It's a copy. The real telescope was stolen last year.\" The caretaker was confused. \"But how do you know?\" he asked. The police officer explained, \"We found the real telescope in the harbour. It",
+        "size": {
+          "total_model": {
+            "bytes": 16381470720,
+            "GB": 16.38147072,
+            "GiB": 15.256433486938477
+          },
+          "replaced_252_linears": {
+            "bytes": 13891534848,
+            "GB": 13.891534848,
+            "GiB": 12.9375,
+            "effective_bpw": 16.0
+          }
+        }
+      },
+      "q4_g64": {
+        "generated_tokens": 128,
+        "timed_decode_sweeps": 127,
+        "decode_seconds": 1.204128292,
+        "tok_s": 105.47048918604763,
+        "tokens": [
+          264,
+          14888,
+          1633,
+          19057,
+          304,
+          279,
+          62780,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          3884,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606,
+          13,
+          1084,
+          572,
+          264,
+          10770,
+          19836,
+          4113,
+          566,
+          1030,
+          3512,
+          34606
+        ],
+        "text": " a strange object floating in the heavens. It was a craft unlike anything he had ever seen. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined. It was a craft unlike anything he had ever imagined",
+        "size": {
+          "total_model": {
+            "bytes": 5502330880,
+            "GB": 5.50233088,
+            "GiB": 5.124444961547852
+          },
+          "replaced_252_linears": {
+            "bytes": 3906994176,
+            "GB": 3.906994176,
+            "GiB": 3.638671875,
+            "effective_bpw": 4.5
+          }
+        }
+      },
+      "q2_g64": {
+        "generated_tokens": 128,
+        "timed_decode_sweeps": 127,
+        "decode_seconds": 0.908618667,
+        "tok_s": 139.77260715908227,
+        "tokens": [
+          82,
+          339,
+          2611,
+          287,
+          339,
+          295,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          339,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          3605,
+          318,
+          23828,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487,
+          82,
+          487
+        ],
+        "text": "sthetyingthetthththththththththththththththsitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysatisim ashitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysitysity",
+        "size": {
+          "total_model": {
+            "bytes": 3610306560,
+            "GB": 3.61030656,
+            "GiB": 3.3623600006103516
+          },
+          "replaced_252_linears": {
+            "bytes": 2170552320,
+            "GB": 2.17055232,
+            "GiB": 2.021484375,
+            "effective_bpw": 2.5
+          }
+        }
+      },
+      "lut2_rht_qera_r32": {
+        "generated_tokens": 128,
+        "timed_decode_sweeps": 127,
+        "decode_seconds": 3.685092916,
+        "tok_s": 34.463174442247904,
+        "tokens": [
+          279,
+          55825,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311,
+          279,
+          9759,
+          13,
+          576,
+          55825,
+          572,
+          738,
+          311
+        ],
+        "text": " the telescope. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to the stars. The telescope was set to",
+        "size": {
+          "total_model": {
+            "bytes": 4376404992,
+            "GB": 4.376404992,
+            "GiB": 4.075844764709473
+          },
+          "replaced_252_linears": {
+            "bytes": 1886469120,
+            "GB": 1.88646912,
+            "GiB": 1.756911277770996,
+            "effective_bpw": 2.172798488451087
+          }
+        }
+      }
+    },
+    "hero_speedup_over_q4": 0.32675656203182696,
+    "hero_speedup_over_q2": 0.24656601277404538
+  },
+  "hero": {
+    "quality_mode": "lut2_rht_qera_r32",
+    "mean_sealed_kl_nats": 0.9821862068804004,
+    "live_tok_s": 34.463174442247904,
+    "live_speedup_over_q4": 0.32675656203182696
+  }
+}

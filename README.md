@@ -172,6 +172,24 @@ Cutting `exp13`'s 4-pass screening pipeline in half (**144 → 72 Metal 4 dispat
   2. **128K (`19.33 GB` KV) Live Verbatim NIAH Solved:** With `4×` YaRN, Sign-KV v2 matches Dense FP16 SDPA char-for-char (`' QUASAR-7305. All authorised operators must record the exact passcode QUASAR-73'`) at **`62.35 tok/s` (`2.46×` E2E, `6.72×` attn, `24.85×` KV DRAM cut)**!
   3. **\*256K (`38.65 GB` FP16 KV) Sparse Denoising Effect:** At `8×` extrapolated YaRN (`262,144` tokens), exact Dense FP16 SDPA collapsed completely (`' 11111111111111111111111'` at `13.18 tok/s`), whereas ALL FOUR Sign-KV v2 arms (`K=256/512`, `norm=on/off`) filtered out `99.8%` of distractors and recovered the buried codeword `'MERIDIAN'` from token `131,029` (e.g. `" 'MERIDIAN-12'."` at `46–51 tok/s`, **`3.88×` E2E / `11.89×` attn / `27.97×` KV cut** — missing only the 4 numeric digits beyond `8×` RoPE extrapolation).
 
+### 13. Parseval-RHT 2.0-Bit Zero-FMA TG-SRAM LUT + Shared QERA Bessel End-to-End (`benchmarks/exp20_qera_lut2_metal4_e2e.py`)
+Combining our two quantized breakthroughs across **all 252 linear layers of `Qwen3-8B-Base`** (`results/exp20_qera_lut2_e2e.json`, Metal 4 FP32 differential error `1.2e-7`–`1.9e-6`):
+
+| 36-Layer `Qwen3-8B-Base` Mode | Linear `bpw` | Sealed FP64 KL (nats) | Top-1 vs BF16 | 6× FFN `K=1` | 6× FFN `K=4` | 6× FFN `K=8` | Live 36L Sample |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | :--- |
+| Stock `Q4-g64` | `4.500` | `0.5156` | `71.0%` | `0.1583 ms` | `0.2060 ms` | `0.3389 ms` | Coherent (`105.5 tok/s`) |
+| Stock `Q3-g64` | `3.500` | `0.6524` | `56.5%` | — | — | — | Reference bar |
+| Stock `Q2-g64` | `2.500` | `5.1100` | `6.0%` | `0.1101 ms` | `0.1978 ms` | `0.3380 ms` | **Gibberish** (`sthetyingthetht...`, `139.8 tok/s`) |
+| **`Q2-g64 + Shared QERA R32`** | **`2.669`** | **`0.6831`** (`7.48×` cut!) | **`63.0%`** *(beats Q3!)* | — | — | — | Beats Q3 at `0.83 bpw` smaller |
+| **Parseval-RHT `LUT2` (Zero-FMA)** | **`2.004`** | `4.2068` | `19.0%` | **`0.1229 ms`** (`1.29×` Q4!) | **`0.1929 ms`** (`1.07×` Q4!) | **`0.3089 ms`** (`1.10×` Q4!) | Beats Q4 & Q2 on FFN `K=4,8` |
+| **`LUT2-RHT + Shared QERA R32`** | **`2.173`** | **`0.9822`** (`4.28×` cut!) | **`52.0%`** | `0.2323 ms` (`0.68×` Q4) | `0.2636 ms` | `0.3844 ms` | **Coherent English** (`34.5 tok/s`, unfused `t0`) |
+| **`LUT2-RHT + Shared QERA R64`** | **`2.341`** | **`0.8058`** (`5.22×` cut!) | **`57.0%`** *(beats Q3!)* | — | — | — | Beats stock `Q3` at `2.34 bpw` with 0 FMAs! |
+
+- **Two Wins + One Decisive Systems Lesson:**
+  1. **Quality:** Stock `Q2-g64` (`2.50 bpw`) collapses into unintelligible gibberish (`6.0%` top-1); adding Shared QERA rescues **2.34 bpw Zero-FMA `LUT2-RHT + QERA-R64` to `57.0%` top-1 (beating stock `Q3-g64`'s `56.5%` at `3.50 bpw`!)**, and `Q2-g64 + QERA-R32` hits **`63.0%` top-1**!
+  2. **Block Speed (Pure LUT2):** On full 6-copy SLC-flushed `gate+up+SiLU+down` FFN blocks, zero-FMA `lut2_rht` beats stock MLX `Q4-g64` at **`K=1` (`1.29×`)**, **`K=4` (`1.07×`, beating `Q2` too)**, and **`K=8` (`1.10×`, beating `Q2` too)**.
+  3. **Honest Unfused E2E Limit (`t0` Law Confirmed Again!):** Running `RHT` (Python butterfly) + 2-pass `LUT` + reducer + separate `x@A` / `B@u` ops unfused exploded per-layer `t0` dispatches, dropping live 36L decode to **`34.46 tok/s`** (`0.33×` of Q4). Moral: QERA+RHT+LUT2 MUST be compiled into a **single fused Metal kernel per projection** to translate its `2.16×` single-GEMV advantage into end-to-end tok/s!
+
 ---
 
 ## 10-Model Frontier Council
@@ -191,6 +209,5 @@ Full synthesis and empirical grading of all 10 independent max-thinking council 
 
 ---
 
-## Running Now (Final Wave 5 Benchmarks)
-- `exp20` (running now on `ultra`): **Parseval-RHT 2.0-Bit Zero-FMA Metal 4 TG-SRAM LUT + Shared QERA Bessel Rank-32** end-to-end across all 36 layers of `Qwen3-8B-Base` (testing Q4-grade quality at ~2× Q4 speed!).
-- `exp17b` (staged on `ultra`, next): **`169 GB` 45-Layer 288-Expert Frontier `GLM-5.3-Flash-MLX-4bit-MTP`** (`215 GiB` under macOS's `384 GiB` default `iogpu.wired_limit_mb=0` cap — after catching `389.59 GiB` `GLM-5.3-4bit` paging at `0.19 tok/s` when `5.6 GiB` over the default wired limit!).
+## Running Now (Final Wave 5 Frontier Benchmark)
+- `exp17b` (running now on `ultra`): **`169 GB` 45-Layer 288-Expert Frontier `GLM-5.3-Flash-MLX-4bit-MTP`** (`215 GiB` under macOS's `384 GiB` default `iogpu.wired_limit_mb=0` cap — after catching `389.59 GiB` `GLM-5.3-4bit` paging at `0.19 tok/s` when `5.6 GiB` over the default wired limit!). Measuring serial decode, exact `K=1..16` verify knee, 42-layer `E=288, k=8` frontier MoE expert-union law, and `B=1..8` multi-stream aggregate throughput!
