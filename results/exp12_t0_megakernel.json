@@ -1,0 +1,75 @@
+{
+  "t0_diagnostic": {
+    "dummy36_eager_t0_ms": 3.411,
+    "dummy36_us_per_layer": 94.8,
+    "mlp36_eager_ms": 0.952,
+    "mlp36_compiled_ms": 0.739,
+    "mlp36_compile_speedup": 1.29
+  },
+  "fused_rms_swiglu": [
+    {
+      "shape": "Qwen3-0.6B (1024->3072)",
+      "D": 1024,
+      "I": 3072,
+      "max_diff": 4.0,
+      "mlx_5ops_ms": 0.0332,
+      "mlx_bw_gbs": 379.1,
+      "fused_1op_ms": 0.0281,
+      "fused_bw_gbs": 447.9,
+      "speedup": 1.18
+    },
+    {
+      "shape": "Qwen3-4B   (2560->9728)",
+      "D": 2560,
+      "I": 9728,
+      "max_diff": 16.0,
+      "mlx_5ops_ms": 0.1798,
+      "mlx_bw_gbs": 554.0,
+      "fused_1op_ms": 0.1822,
+      "fused_bw_gbs": 546.8,
+      "speedup": 0.99
+    },
+    {
+      "shape": "Qwen3-8B   (4096->12288)",
+      "D": 4096,
+      "I": 12288,
+      "max_diff": 16.0,
+      "mlx_5ops_ms": 0.3572,
+      "mlx_bw_gbs": 563.7,
+      "fused_1op_ms": 0.3604,
+      "fused_bw_gbs": 558.7,
+      "speedup": 0.99
+    }
+  ],
+  "fable_qwen4b_q4_ctx_slope": {
+    "points": [
+      {
+        "ctx_len": 128,
+        "ms_per_tok": 6.771,
+        "tok_s": 147.7
+      },
+      {
+        "ctx_len": 1024,
+        "ms_per_tok": 7.343,
+        "tok_s": 136.18
+      },
+      {
+        "ctx_len": 4096,
+        "ms_per_tok": 8.297,
+        "tok_s": 120.52
+      },
+      {
+        "ctx_len": 8192,
+        "ms_per_tok": 8.938,
+        "tok_s": 111.88
+      },
+      {
+        "ctx_len": 16384,
+        "ms_per_tok": 11.0,
+        "tok_s": 90.91
+      }
+    ],
+    "fit_intercept_ms": 7.001,
+    "fit_slope_us_per_ctx_tok": 0.2462
+  }
+}

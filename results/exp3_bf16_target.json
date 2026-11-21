@@ -1,0 +1,973 @@
+{
+  "target": "Qwen3-8B-BF16",
+  "n_tokens": 96,
+  "stock_median_tok_s": 39.94,
+  "stock_runs": [
+    {
+      "sha": "bcd155a7b8d5c9c6",
+      "ttft_ms": 54.69,
+      "decode_s": 2.3822,
+      "tok_s": 39.88,
+      "target_sweeps": 95
+    },
+    {
+      "sha": "fb16ca5492e2a62f",
+      "ttft_ms": 56.41,
+      "decode_s": 2.3811,
+      "tok_s": 39.9,
+      "target_sweeps": 95
+    },
+    {
+      "sha": "d80696075e176345",
+      "ttft_ms": 54.99,
+      "decode_s": 2.3711,
+      "tok_s": 40.07,
+      "target_sweeps": 95
+    },
+    {
+      "sha": "92603064f0b2d60b",
+      "ttft_ms": 55.46,
+      "decode_s": 2.3769,
+      "tok_s": 39.97,
+      "target_sweeps": 95
+    }
+  ],
+  "arms": [
+    {
+      "arm": "Qwen3-0.6B-Q4",
+      "K": 4,
+      "share_kv": false,
+      "all_exact_match": false,
+      "median_tok_s": 68.35,
+      "speedup_vs_stock": 1.712,
+      "mean_emitted_per_sweep": 2.817,
+      "mean_draft_accept_rate": 0.4742,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 61.99,
+          "decode_s": 1.3478,
+          "tok_s": 70.49,
+          "target_sweeps": 33,
+          "mean_emitted_per_sweep": 2.879,
+          "draft_accept_rate": 0.4809,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 62.63,
+          "decode_s": 1.9238,
+          "tok_s": 49.38,
+          "target_sweeps": 47,
+          "mean_emitted_per_sweep": 2.021,
+          "draft_accept_rate": 0.2634,
+          "exact_match": true
+        },
+        {
+          "sha": "c275c5918946c7a5",
+          "ttft_ms": 64.27,
+          "decode_s": 1.4348,
+          "tok_s": 66.21,
+          "target_sweeps": 35,
+          "mean_emitted_per_sweep": 2.714,
+          "draft_accept_rate": 0.4453,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 63.52,
+          "decode_s": 1.0557,
+          "tok_s": 89.99,
+          "target_sweeps": 26,
+          "mean_emitted_per_sweep": 3.654,
+          "draft_accept_rate": 0.7071,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "Qwen3-0.6B-Q4",
+      "K": 8,
+      "share_kv": false,
+      "all_exact_match": false,
+      "median_tok_s": 54.19,
+      "speedup_vs_stock": 1.357,
+      "mean_emitted_per_sweep": 3.351,
+      "mean_draft_accept_rate": 0.3193,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 62.49,
+          "decode_s": 1.54,
+          "tok_s": 61.69,
+          "target_sweeps": 26,
+          "mean_emitted_per_sweep": 3.654,
+          "draft_accept_rate": 0.3365,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 61.61,
+          "decode_s": 2.554,
+          "tok_s": 37.2,
+          "target_sweeps": 45,
+          "mean_emitted_per_sweep": 2.111,
+          "draft_accept_rate": 0.1466,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 62.29,
+          "decode_s": 2.0352,
+          "tok_s": 46.68,
+          "target_sweeps": 36,
+          "mean_emitted_per_sweep": 2.639,
+          "draft_accept_rate": 0.2193,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 63.27,
+          "decode_s": 1.0345,
+          "tok_s": 91.83,
+          "target_sweeps": 19,
+          "mean_emitted_per_sweep": 5.0,
+          "draft_accept_rate": 0.5746,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "Qwen3-0.6B-Q4",
+      "K": 12,
+      "share_kv": false,
+      "all_exact_match": false,
+      "median_tok_s": 42.76,
+      "speedup_vs_stock": 1.071,
+      "mean_emitted_per_sweep": 3.51,
+      "mean_draft_accept_rate": 0.2298,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 64.51,
+          "decode_s": 1.9706,
+          "tok_s": 48.21,
+          "target_sweeps": 26,
+          "mean_emitted_per_sweep": 3.654,
+          "draft_accept_rate": 0.2295,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 62.42,
+          "decode_s": 3.237,
+          "tok_s": 29.35,
+          "target_sweeps": 44,
+          "mean_emitted_per_sweep": 2.159,
+          "draft_accept_rate": 0.1046,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 63.66,
+          "decode_s": 2.5461,
+          "tok_s": 37.31,
+          "target_sweeps": 36,
+          "mean_emitted_per_sweep": 2.639,
+          "draft_accept_rate": 0.1536,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 63.83,
+          "decode_s": 1.2233,
+          "tok_s": 77.66,
+          "target_sweeps": 17,
+          "mean_emitted_per_sweep": 5.588,
+          "draft_accept_rate": 0.4317,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "Qwen3-1.7B-Q4",
+      "K": 6,
+      "share_kv": false,
+      "all_exact_match": true,
+      "median_tok_s": 83.52,
+      "speedup_vs_stock": 2.091,
+      "mean_emitted_per_sweep": 4.446,
+      "mean_draft_accept_rate": 0.58,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 68.15,
+          "decode_s": 1.0478,
+          "tok_s": 90.67,
+          "target_sweeps": 19,
+          "mean_emitted_per_sweep": 5.0,
+          "draft_accept_rate": 0.6667,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 66.97,
+          "decode_s": 1.2441,
+          "tok_s": 76.36,
+          "target_sweeps": 23,
+          "mean_emitted_per_sweep": 4.13,
+          "draft_accept_rate": 0.5368,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 68.43,
+          "decode_s": 1.6855,
+          "tok_s": 56.36,
+          "target_sweeps": 31,
+          "mean_emitted_per_sweep": 3.065,
+          "draft_accept_rate": 0.3441,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 68.59,
+          "decode_s": 0.9339,
+          "tok_s": 101.72,
+          "target_sweeps": 17,
+          "mean_emitted_per_sweep": 5.588,
+          "draft_accept_rate": 0.7723,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "Qwen3-1.7B-Q4",
+      "K": 10,
+      "share_kv": false,
+      "all_exact_match": false,
+      "median_tok_s": 75.24,
+      "speedup_vs_stock": 1.884,
+      "mean_emitted_per_sweep": 5.598,
+      "mean_draft_accept_rate": 0.4709,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 68.13,
+          "decode_s": 1.1248,
+          "tok_s": 84.46,
+          "target_sweeps": 15,
+          "mean_emitted_per_sweep": 6.333,
+          "draft_accept_rate": 0.5333,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 66.84,
+          "decode_s": 1.4389,
+          "tok_s": 66.02,
+          "target_sweeps": 20,
+          "mean_emitted_per_sweep": 4.75,
+          "draft_accept_rate": 0.4021,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 68.24,
+          "decode_s": 2.0053,
+          "tok_s": 47.37,
+          "target_sweeps": 28,
+          "mean_emitted_per_sweep": 3.393,
+          "draft_accept_rate": 0.2567,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 69.2,
+          "decode_s": 0.9092,
+          "tok_s": 104.48,
+          "target_sweeps": 12,
+          "mean_emitted_per_sweep": 7.917,
+          "draft_accept_rate": 0.6917,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "Qwen3-1.7B-Q4",
+      "K": 14,
+      "share_kv": false,
+      "all_exact_match": false,
+      "median_tok_s": 68.0,
+      "speedup_vs_stock": 1.703,
+      "mean_emitted_per_sweep": 6.101,
+      "mean_draft_accept_rate": 0.3921,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 67.6,
+          "decode_s": 1.2938,
+          "tok_s": 73.43,
+          "target_sweeps": 14,
+          "mean_emitted_per_sweep": 6.786,
+          "draft_accept_rate": 0.4309,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 67.51,
+          "decode_s": 1.5183,
+          "tok_s": 62.57,
+          "target_sweeps": 17,
+          "mean_emitted_per_sweep": 5.588,
+          "draft_accept_rate": 0.3591,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 67.96,
+          "decode_s": 2.4714,
+          "tok_s": 38.44,
+          "target_sweeps": 28,
+          "mean_emitted_per_sweep": 3.393,
+          "draft_accept_rate": 0.1909,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 68.15,
+          "decode_s": 1.0083,
+          "tok_s": 94.22,
+          "target_sweeps": 11,
+          "mean_emitted_per_sweep": 8.636,
+          "draft_accept_rate": 0.5874,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q2-ownKV",
+      "K": 6,
+      "share_kv": false,
+      "all_exact_match": true,
+      "median_tok_s": 13.88,
+      "speedup_vs_stock": 0.348,
+      "mean_emitted_per_sweep": 1.014,
+      "mean_draft_accept_rate": 0.0023,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 94.81,
+          "decode_s": 6.8558,
+          "tok_s": 13.86,
+          "target_sweeps": 94,
+          "mean_emitted_per_sweep": 1.011,
+          "draft_accept_rate": 0.0018,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 89.02,
+          "decode_s": 6.7349,
+          "tok_s": 14.11,
+          "target_sweeps": 92,
+          "mean_emitted_per_sweep": 1.033,
+          "draft_accept_rate": 0.0056,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 90.27,
+          "decode_s": 6.9098,
+          "tok_s": 13.75,
+          "target_sweeps": 95,
+          "mean_emitted_per_sweep": 1.0,
+          "draft_accept_rate": 0.0,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 90.38,
+          "decode_s": 6.8343,
+          "tok_s": 13.9,
+          "target_sweeps": 94,
+          "mean_emitted_per_sweep": 1.011,
+          "draft_accept_rate": 0.0018,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q2-ownKV",
+      "K": 10,
+      "share_kv": false,
+      "all_exact_match": false,
+      "median_tok_s": 9.79,
+      "speedup_vs_stock": 0.245,
+      "mean_emitted_per_sweep": 1.019,
+      "mean_draft_accept_rate": 0.002,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 89.87,
+          "decode_s": 9.6607,
+          "tok_s": 9.83,
+          "target_sweeps": 94,
+          "mean_emitted_per_sweep": 1.011,
+          "draft_accept_rate": 0.0011,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 89.27,
+          "decode_s": 9.494,
+          "tok_s": 10.01,
+          "target_sweeps": 92,
+          "mean_emitted_per_sweep": 1.033,
+          "draft_accept_rate": 0.0034,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 90.14,
+          "decode_s": 9.7358,
+          "tok_s": 9.76,
+          "target_sweeps": 93,
+          "mean_emitted_per_sweep": 1.022,
+          "draft_accept_rate": 0.0023,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 90.58,
+          "decode_s": 9.9171,
+          "tok_s": 9.58,
+          "target_sweeps": 94,
+          "mean_emitted_per_sweep": 1.011,
+          "draft_accept_rate": 0.0011,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q2-ownKV",
+      "K": 16,
+      "share_kv": false,
+      "all_exact_match": true,
+      "median_tok_s": 6.28,
+      "speedup_vs_stock": 0.157,
+      "mean_emitted_per_sweep": 1.014,
+      "mean_draft_accept_rate": 0.0009,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 92.63,
+          "decode_s": 15.1383,
+          "tok_s": 6.28,
+          "target_sweeps": 94,
+          "mean_emitted_per_sweep": 1.011,
+          "draft_accept_rate": 0.0007,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 88.93,
+          "decode_s": 14.621,
+          "tok_s": 6.5,
+          "target_sweeps": 92,
+          "mean_emitted_per_sweep": 1.033,
+          "draft_accept_rate": 0.0022,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 89.34,
+          "decode_s": 15.2857,
+          "tok_s": 6.21,
+          "target_sweeps": 95,
+          "mean_emitted_per_sweep": 1.0,
+          "draft_accept_rate": 0.0,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 89.81,
+          "decode_s": 15.127,
+          "tok_s": 6.28,
+          "target_sweeps": 94,
+          "mean_emitted_per_sweep": 1.011,
+          "draft_accept_rate": 0.0007,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q2-SHARED_KV",
+      "K": 6,
+      "share_kv": true,
+      "all_exact_match": true,
+      "median_tok_s": 22.62,
+      "speedup_vs_stock": 0.566,
+      "mean_emitted_per_sweep": 1.698,
+      "mean_draft_accept_rate": 0.1208,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 55.25,
+          "decode_s": 4.1107,
+          "tok_s": 23.11,
+          "target_sweeps": 56,
+          "mean_emitted_per_sweep": 1.696,
+          "draft_accept_rate": 0.1178,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 54.87,
+          "decode_s": 4.2948,
+          "tok_s": 22.12,
+          "target_sweeps": 60,
+          "mean_emitted_per_sweep": 1.583,
+          "draft_accept_rate": 0.1006,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 55.3,
+          "decode_s": 4.4517,
+          "tok_s": 21.34,
+          "target_sweeps": 62,
+          "mean_emitted_per_sweep": 1.532,
+          "draft_accept_rate": 0.0942,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 55.45,
+          "decode_s": 3.4788,
+          "tok_s": 27.31,
+          "target_sweeps": 48,
+          "mean_emitted_per_sweep": 1.979,
+          "draft_accept_rate": 0.1708,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q2-SHARED_KV",
+      "K": 10,
+      "share_kv": true,
+      "all_exact_match": false,
+      "median_tok_s": 16.28,
+      "speedup_vs_stock": 0.408,
+      "mean_emitted_per_sweep": 1.743,
+      "mean_draft_accept_rate": 0.0787,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 56.07,
+          "decode_s": 5.6069,
+          "tok_s": 16.94,
+          "target_sweeps": 52,
+          "mean_emitted_per_sweep": 1.827,
+          "draft_accept_rate": 0.083,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 55.08,
+          "decode_s": 6.0833,
+          "tok_s": 15.62,
+          "target_sweeps": 59,
+          "mean_emitted_per_sweep": 1.61,
+          "draft_accept_rate": 0.0652,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 55.04,
+          "decode_s": 6.3024,
+          "tok_s": 15.07,
+          "target_sweeps": 61,
+          "mean_emitted_per_sweep": 1.557,
+          "draft_accept_rate": 0.0609,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 55.37,
+          "decode_s": 4.9855,
+          "tok_s": 19.06,
+          "target_sweeps": 48,
+          "mean_emitted_per_sweep": 1.979,
+          "draft_accept_rate": 0.1057,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q2-SHARED_KV",
+      "K": 16,
+      "share_kv": true,
+      "all_exact_match": true,
+      "median_tok_s": 10.53,
+      "speedup_vs_stock": 0.264,
+      "mean_emitted_per_sweep": 1.745,
+      "mean_draft_accept_rate": 0.0513,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 56.08,
+          "decode_s": 8.8689,
+          "tok_s": 10.71,
+          "target_sweeps": 53,
+          "mean_emitted_per_sweep": 1.792,
+          "draft_accept_rate": 0.0511,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 54.82,
+          "decode_s": 9.1863,
+          "tok_s": 10.34,
+          "target_sweeps": 59,
+          "mean_emitted_per_sweep": 1.61,
+          "draft_accept_rate": 0.0426,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 56.18,
+          "decode_s": 9.7288,
+          "tok_s": 9.76,
+          "target_sweeps": 61,
+          "mean_emitted_per_sweep": 1.557,
+          "draft_accept_rate": 0.0394,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 55.47,
+          "decode_s": 7.463,
+          "tok_s": 12.73,
+          "target_sweeps": 47,
+          "mean_emitted_per_sweep": 2.021,
+          "draft_accept_rate": 0.072,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q3-ownKV",
+      "K": 6,
+      "share_kv": false,
+      "all_exact_match": true,
+      "median_tok_s": 43.41,
+      "speedup_vs_stock": 1.087,
+      "mean_emitted_per_sweep": 3.712,
+      "mean_draft_accept_rate": 0.4697,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 90.1,
+          "decode_s": 2.021,
+          "tok_s": 47.01,
+          "target_sweeps": 25,
+          "mean_emitted_per_sweep": 3.8,
+          "draft_accept_rate": 0.4797,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 90.89,
+          "decode_s": 2.3868,
+          "tok_s": 39.8,
+          "target_sweeps": 30,
+          "mean_emitted_per_sweep": 3.167,
+          "draft_accept_rate": 0.3771,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 91.29,
+          "decode_s": 2.6223,
+          "tok_s": 36.23,
+          "target_sweeps": 33,
+          "mean_emitted_per_sweep": 2.879,
+          "draft_accept_rate": 0.3281,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 89.78,
+          "decode_s": 1.5311,
+          "tok_s": 62.05,
+          "target_sweeps": 19,
+          "mean_emitted_per_sweep": 5.0,
+          "draft_accept_rate": 0.6937,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q3-ownKV",
+      "K": 10,
+      "share_kv": false,
+      "all_exact_match": false,
+      "median_tok_s": 34.56,
+      "speedup_vs_stock": 0.866,
+      "mean_emitted_per_sweep": 4.589,
+      "mean_draft_accept_rate": 0.3739,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 90.36,
+          "decode_s": 2.5016,
+          "tok_s": 37.98,
+          "target_sweeps": 21,
+          "mean_emitted_per_sweep": 4.524,
+          "draft_accept_rate": 0.3524,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 89.57,
+          "decode_s": 3.05,
+          "tok_s": 31.15,
+          "target_sweeps": 26,
+          "mean_emitted_per_sweep": 3.654,
+          "draft_accept_rate": 0.2724,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 91.14,
+          "decode_s": 3.1119,
+          "tok_s": 30.53,
+          "target_sweeps": 28,
+          "mean_emitted_per_sweep": 3.393,
+          "draft_accept_rate": 0.2587,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 90.78,
+          "decode_s": 1.6098,
+          "tok_s": 59.01,
+          "target_sweeps": 14,
+          "mean_emitted_per_sweep": 6.786,
+          "draft_accept_rate": 0.6119,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q3-ownKV",
+      "K": 16,
+      "share_kv": false,
+      "all_exact_match": true,
+      "median_tok_s": 23.66,
+      "speedup_vs_stock": 0.592,
+      "mean_emitted_per_sweep": 4.793,
+      "mean_draft_accept_rate": 0.2545,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 90.03,
+          "decode_s": 3.5726,
+          "tok_s": 26.59,
+          "target_sweeps": 19,
+          "mean_emitted_per_sweep": 5.0,
+          "draft_accept_rate": 0.2575,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 89.09,
+          "decode_s": 4.5845,
+          "tok_s": 20.72,
+          "target_sweeps": 25,
+          "mean_emitted_per_sweep": 3.8,
+          "draft_accept_rate": 0.1849,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 90.03,
+          "decode_s": 5.5318,
+          "tok_s": 17.17,
+          "target_sweeps": 31,
+          "mean_emitted_per_sweep": 3.065,
+          "draft_accept_rate": 0.141,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 89.99,
+          "decode_s": 2.2932,
+          "tok_s": 41.43,
+          "target_sweeps": 13,
+          "mean_emitted_per_sweep": 7.308,
+          "draft_accept_rate": 0.4346,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q3-SHARED_KV",
+      "K": 6,
+      "share_kv": true,
+      "all_exact_match": true,
+      "median_tok_s": 53.36,
+      "speedup_vs_stock": 1.336,
+      "mean_emitted_per_sweep": 4.25,
+      "mean_draft_accept_rate": 0.5644,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 55.2,
+          "decode_s": 1.7392,
+          "tok_s": 54.62,
+          "target_sweeps": 22,
+          "mean_emitted_per_sweep": 4.318,
+          "draft_accept_rate": 0.5781,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 55.16,
+          "decode_s": 1.8236,
+          "tok_s": 52.09,
+          "target_sweeps": 23,
+          "mean_emitted_per_sweep": 4.13,
+          "draft_accept_rate": 0.5448,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 55.46,
+          "decode_s": 2.2863,
+          "tok_s": 41.55,
+          "target_sweeps": 29,
+          "mean_emitted_per_sweep": 3.276,
+          "draft_accept_rate": 0.3988,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 55.47,
+          "decode_s": 1.4462,
+          "tok_s": 65.69,
+          "target_sweeps": 18,
+          "mean_emitted_per_sweep": 5.278,
+          "draft_accept_rate": 0.7358,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q3-SHARED_KV",
+      "K": 10,
+      "share_kv": true,
+      "all_exact_match": false,
+      "median_tok_s": 44.32,
+      "speedup_vs_stock": 1.11,
+      "mean_emitted_per_sweep": 5.491,
+      "mean_draft_accept_rate": 0.4728,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 55.57,
+          "decode_s": 1.9721,
+          "tok_s": 48.17,
+          "target_sweeps": 17,
+          "mean_emitted_per_sweep": 5.588,
+          "draft_accept_rate": 0.4788,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 55.06,
+          "decode_s": 2.3477,
+          "tok_s": 40.47,
+          "target_sweeps": 20,
+          "mean_emitted_per_sweep": 4.75,
+          "draft_accept_rate": 0.3819,
+          "exact_match": true
+        },
+        {
+          "sha": "313fb1e9a2932e02",
+          "ttft_ms": 56.42,
+          "decode_s": 2.4563,
+          "tok_s": 38.68,
+          "target_sweeps": 22,
+          "mean_emitted_per_sweep": 4.318,
+          "draft_accept_rate": 0.361,
+          "exact_match": false
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 56.42,
+          "decode_s": 1.4791,
+          "tok_s": 64.23,
+          "target_sweeps": 13,
+          "mean_emitted_per_sweep": 7.308,
+          "draft_accept_rate": 0.6694,
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "arm": "SelfShadow-8B-Q3-SHARED_KV",
+      "K": 16,
+      "share_kv": true,
+      "all_exact_match": true,
+      "median_tok_s": 30.95,
+      "speedup_vs_stock": 0.775,
+      "mean_emitted_per_sweep": 5.941,
+      "mean_draft_accept_rate": 0.3283,
+      "runs": [
+        {
+          "sha": "bcd155a7b8d5c9c6",
+          "ttft_ms": 56.45,
+          "decode_s": 2.8776,
+          "tok_s": 33.01,
+          "target_sweeps": 15,
+          "mean_emitted_per_sweep": 6.333,
+          "draft_accept_rate": 0.3375,
+          "exact_match": true
+        },
+        {
+          "sha": "fb16ca5492e2a62f",
+          "ttft_ms": 54.71,
+          "decode_s": 3.2877,
+          "tok_s": 28.9,
+          "target_sweeps": 18,
+          "mean_emitted_per_sweep": 5.278,
+          "draft_accept_rate": 0.2836,
+          "exact_match": true
+        },
+        {
+          "sha": "d80696075e176345",
+          "ttft_ms": 55.05,
+          "decode_s": 4.7828,
+          "tok_s": 19.86,
+          "target_sweeps": 27,
+          "mean_emitted_per_sweep": 3.519,
+          "draft_accept_rate": 0.1738,
+          "exact_match": true
+        },
+        {
+          "sha": "92603064f0b2d60b",
+          "ttft_ms": 55.99,
+          "decode_s": 1.9755,
+          "tok_s": 48.09,
+          "target_sweeps": 11,
+          "mean_emitted_per_sweep": 8.636,
+          "draft_accept_rate": 0.5183,
+          "exact_match": true
+        }
+      ]
+    }
+  ]
+}
