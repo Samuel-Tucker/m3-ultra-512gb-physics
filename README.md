@@ -142,6 +142,21 @@ Extending `exp9` with proper **GatedDeltaNet recurrent + conv state rollback** a
 - **`code_refactor`:** Stock serial `86.60 tok/s` → **`DFlash-Q4` `170.55 tok/s` (`1.97×`, `100.0%` SHA-256 exact)**.
 - **Honest Hybrid Takeaway:** On a model that *already* has a 6-layer parallel `DFlash` drafter (`3.35 ms`), pure `DFlash-Q4` (`144.9 tok/s` mean) beats suffix-first stacking (`136.2 tok/s`) because short suffix hits (`K=2..4`) preempt full `K=8` DFlash sweeps; standalone Zero-`t0` CPU Suffix (`1.66×` on RAG at 0 RAM!) shines on models *without* a DFlash drafter (`Qwen3-8B-Q4`, `GLM-5.3`). On `fresh_prose` (tok 103) and `math_proof` (tok 15), all 4 batched arms agree with each other on the exact same batch-vs-serial GatedDeltaNet BF16 tie-break.
 
+### 11. Full 36-Layer 100.000% Lossless 12.135-Bit BF16 Stack — Beating Stock 4-Bit Q4 on RAG (`benchmarks/exp19_e2e_bitexact_bf16_stack.py`)
+Wiring Opus 5.5 MAX's lossless 12.135-bit BF16 Metal 4 codec into **all 253 linear matrices of `Qwen3-8B-Base` (all 36 layers + 622.3M-weight `lm_head`, `0` uint16 mismatches!)** with a branchless 5-bitop zero-spill `B=1..9` Metal 4 kernel (`639–668 eff GB/s` at `B=1`, `1.35×` vs stock MLX at `B=4`), then stacking **Zero-`t0` CPU Suffix Oracle (`K=8`) + `Qwen3-1.7B-Q4` (`K=6`)** across 4 realistic 160-token workloads (`results/exp19_bitexact_bf16_stack.json`):
+- **Model RAM Saved (ZERO bits lost):** **`16.381 GB → 12.726 GB`** (**`-3.656 GB` = `22.32%` total / `24.15%` linear weights**, `12.1357 bits/weight`), **`0.000000`** 36-layer decode+matmul logit diff (`100.00%` top-1 vs lossy Q4-g64's `23.47` max diff / `75.0%` top-1!).
+- **Every speculative workload (`4/4`) passed Gate 3 `100.00%` exact vs serial `SplitBF16`!**
+
+| Mode (`Qwen3-8B-Base`, 160 tok × 4 workloads) | Lossless? | Model RAM | `python_code` | `code_refactor` | `rag_extract` | `math_proof` | **Aggregate `tok/s`** | **vs Stock BF16** |
+| :--- | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Stock `Qwen3-8B-Base` BF16 (`K=1`) | YES | `16.38 GB` | `39.96` | `39.91` | `39.84` | `40.02` | `39.93 tok/s` | `1.000×` |
+| **Lossless `12.135b SplitBF16` Serial (`K=1`, no drafter)** | **YES (`0` bits lost)** | **`12.73 GB`** | **`45.31`** | **`45.24`** | **`45.01`** | **`45.35`** | **`45.23 tok/s`** | **`1.133×`** |
+| **Lossless `SplitBF16` + `1.7B-Q4` (`K=6`)** | **YES** | `13.69 GB` | **`87.38`** | **`99.31`** | `94.31` | `86.55` | `91.59 tok/s` | **`2.294×`** |
+| **Lossless `SplitBF16` + Zero-`t0` Suffix + `1.7B-Q4`** | **YES** | `13.69 GB` | `80.67` | `98.04` | **`108.39`** *(beats Q4!)* | **`93.44`** | **`94.07 tok/s`** | **`2.356×`** |
+| *Reference: Lossy Stock `Qwen3-8B-Q4-g64` (`K=1`)* | *NO (`3.8–17.5%` match)* | *`4.61 GB`* | *`104.24`* | *`104.07`* | *`102.48`* | *`105.05`* | *`103.95 tok/s`* | *`2.603×`* |
+
+- **Headline:** **100.000% lossless full-BF16 `Qwen3-8B` runs at `94.07 tok/s` aggregate (`2.36×` over stock BF16, `90.5%` of lossy 4-bit Q4 speed!) — and on `rag_extract` hits `108.39 tok/s` (`2.72×`), OUTRIGHT BEATING lossy 4-bit quantized `Qwen3-8B-Q4` (`102.48 tok/s`) with ZERO quantization loss and `3.66 GB` less RAM!**
+
 ---
 
 ## 10-Model Frontier Council
@@ -161,8 +176,7 @@ Full synthesis and empirical grading of all 10 independent max-thinking council 
 
 ---
 
-## Running Now (Wave 4B & Wave 5 Double-Down)
-- `exp17` (running now on `ultra`): **389.6 GiB 78-Layer Frontier `GLM-5.3-4bit-MLX`** full-400GB-RAM physics, MoE expert-union law, Zero-`t0` suffix oracle, and `B=1..8` multi-stream batching!
-- `exp18` (building on Codex Astra): **YaRN-Scaled 128K & 256K Live Verbatim NIAH** (`38.6 GB` KV!) with fused `Masullo-Shell Sign-KV v2`.
-- `exp19` (building on Gemini Carbon): **Full 36-Layer End-to-End 100.000% Bit-Exact Lossless BF16 Stack** (`split_4bit` 12.135b Metal 4 + `Qwen3-1.7B-Q4` speculative + Zero-`t0` CPU Suffix — targeting lossless BF16 faster than stock Q4!).
-- `exp20` (building on Kimi K3.1 Pro): **Parseval-RHT 2.0-Bit Zero-FMA Metal 4 TG-SRAM LUT + Shared QERA Bessel Rank-32** end-to-end (testing Q4-grade quality at ~2× Q4 speed!).
+## Running Now (Wave 5 Final Double-Downs)
+- `exp18` (running now on `ultra`): **YaRN-Scaled 32K / 64K / 128K / 256K Live Verbatim NIAH** (`38.6 GB` FP16 KV!) with **72-dispatch** fused `Masullo-Shell Sign-KV v2`.
+- `exp20` (staged on `ultra`, next): **Parseval-RHT 2.0-Bit Zero-FMA Metal 4 TG-SRAM LUT + Shared QERA Bessel Rank-32** end-to-end across all 36 layers of `Qwen3-8B-Base` (testing Q4-grade quality at ~2× Q4 speed!).
+- `exp17b` (building on Codex Sol): **`169 GB` 45-Layer 288-Expert Frontier `GLM-5.3-Flash-MLX-4bit-MTP`** (`215 GiB` under macOS's `384 GiB` default `iogpu.wired_limit_mb=0` cap — after catching `389.59 GiB` `GLM-5.3-4bit` paging at `0.19 tok/s` when `5.6 GiB` over the default wired limit!).
